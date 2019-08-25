@@ -57,22 +57,7 @@ sns.set(style="whitegrid", color_codes=True)
 
 from matplotlib.colors import ListedColormap
 
-def generate_cmap_q(colors) :
-    '''
-    指定した色で、Qualitative(質的)なカラーマップを生成して返す
-    
-    Parameter
-    ---------
-    colors : array of color hexcode
-    色を16進数表記した文字列を格納した配列。
 
-    Return
-    ------
-    matplotlib.colors.Colormap object かな？
-    
-    '''
-    return ListedColormap(sns.color_palette(colors).as_hex())
-    
 class cure_colormap :
     '''
     プリキュアっぽいカラーマップを生成して取得するクラス
@@ -96,44 +81,23 @@ class cure_colormap :
         self.name_to_cmap = dict()
 
         # ふたりはプリキュア
-        self.cure_black = self.generate_cmap(['#00072A', '#F4F4F4', '#FFC7B8', '#904B2C', '#B2987F', '#FF3398']) # https://pictones.firebaseapp.com/ × http://www.toei-anim.co.jp/movie/2013_precure_allstars/images/futari1.jpg 
-        self.cure_black = generate_cmap_q(['#00072A', '#F4F4F4', '#FFC7B8', '#904B2C', '#B2987F', '#FF3398']) # https://pictones.firebaseapp.com/ × http://www.toei-anim.co.jp/movie/2013_precure_allstars/images/futari1.jpg 
-        self.name_to_cmap['キュアブラック'] = self.cure_black
-        self.name_to_cmap['Cure Black'] = self.cure_black
-
-        self.cure_white = self.generate_cmap(['#F4F4F4', '#FBD6CE', '#0099FF', '#66CCFC', '#05030E', '#726DA3']) # https://pictones.firebaseapp.com/ × http://www.toei-anim.co.jp/movie/2013_precure_allstars/images/futari2.jpg
-        self.name_to_cmap['キュアホワイト'] = self.cure_white
-        self.name_to_cmap['Cure White'] = self.cure_white
+        # self.cure_black = self.generate_cmap(['#00072A', '#F4F4F4', '#FFC7B8', '#904B2C', '#B2987F', '#FF3398']) # https://pictones.firebaseapp.com/ × http://www.toei-anim.co.jp/movie/2013_precure_allstars/images/futari1.jpg 
+        #self.cure_black = self.generate_cmap_q(['#00072A', '#F4F4F4', '#FFC7B8', '#904B2C', '#B2987F', '#FF3398']) # https://pictones.firebaseapp.com/ × http://www.toei-anim.co.jp/movie/2013_precure_allstars/images/futari1.jpg 
+        #self.name_to_cmap['キュアブラック'] = self.cure_black
+        #self.name_to_cmap['Cure Black'] = self.cure_black
+        self.cure_black = self.generate_cure_cmap(['#000395', '#F4F4F4', '#FFC7B8', '#904B2C', '#B2987F', '#FF3398'], ['キュアブラック', 'Cure Black'], method=self.generate_cmap_q) # TODO まだ何か違う
+        self.cure_white = self.generate_cure_cmap(['#F4F4F4', '#FBD6CE', '#0099FF', '#66CCFC', '#05030E', '#726DA3'], ['キュアホワイト', 'Cure White'], method=self.generate_cmap_q) # TODO 違う気がする
 
         # ふたりはプリキュア Max Heart
-        self.shiny_luminous = self.generate_cmap(['#FECF04', '#FEFB53', '#F5F7F7', '#FEB1D1', '#FE3521'])
-        self.name_to_cmap['シャイニールミナス'] = self.shiny_luminous
-        self.name_to_cmap['Shiny Luminous'] = self.shiny_luminous
+        self.shiny_luminous = self.generate_cure_cmap(['#FECF04', '#FEFB53', '#F5F7F7', '#FEB1D1', '#FE3521'], ['シャイニールミナス', 'Shiny Luminous'])
 
         # ふたりはプリキュア Splash Star
-        self.cure_bloom = self.generate_cmap(['#FCAC35', '#FFFF8E', '#FF3292', '#942953'])
-        self.name_to_cmap[''] = self.cure_bloom
-        self.name_to_cmap['Cure Bloom'] = self.cure_bloom
-
-        self.cure_bright = self.generate_cmap(['#FDAD38', '#FBCF84', '#FFFFA6', '#F0E947', '#97F518', '#FFFFDF', '#F93B9A', '#DC0067']) # 東映公式に大きめの画像がない？ # https://www.asahi.co.jp/precure_ss/character/img/cb.gif
-        self.name_to_cmap[''] = self.cure_bright
-        self.name_to_cmap['Cure Bright'] = self.cure_bright
-        
-        self.cure_eglet = self.generate_cmap(['#711391', '#FFFFF3', '#D0D6FF', '#06FCD5'])
-        self.name_to_cmap[''] = self.cure_eglet
-        self.name_to_cmap['Cure Egret'] = self.cure_eglet
-        
-        self.cure_windy = self.generate_cmap(['#741B93', '#D16FE7', '#F8F8F8', '#DFFFFF', '#01FEDE', '#FFF3FD', '#FDB2E1'])  # 東映公式に大きめの画像がない？ # https://www.asahi.co.jp/precure_ss/character/img/cw.gif
-        self.name_to_cmap[''] = self.cure_windy
-        self.name_to_cmap['Cure Windy'] = self.cure_windy
-
-        self.kaoru_kiryuu = self.generate_cmap(['#275D8A', '#DDECF1', '#E7F5FD', '#DDB9CB', '#CC87BB']) # https://lohas.nicoseiga.jp/thumb/8016685i?1522857603
-        self.name_to_cmap['霧生薫'] = self.kaoru_kiryuu
-        self.name_to_cmap['Kaoru Kiryuu'] = self.kaoru_kiryuu
-
-        self.michiru_kiryuu = self.generate_cmap(['#8D2045', '#DC98A9', '#C5E462', '#F9FA9B', '#C11E7A']) # https://lohas.nicoseiga.jp/thumb/8016685i?1522857603
-        self.name_to_cmap['霧生満'] = self.michiru_kiryuu
-        self.name_to_cmap['Michiru Kiryuu'] = self.michiru_kiryuu
+        self.cure_bloom = self.generate_cure_cmap(['#FCAC35', '#FFFF8E', '#FF3292', '#942953'], ['キュアブルーム', 'Cure Bloom'])
+        self.cure_bright = self.generate_cure_cmap(['#FDAD38', '#FBCF84', '#FFFFA6', '#F0E947', '#97F518', '#FFFFDF', '#F93B9A', '#DC0067'], ['キュアブライト', 'Cure Bright']) # 東映公式に大きめの画像がない？ # https://www.asahi.co.jp/precure_ss/character/img/cb.gif
+        self.cure_eglet = self.generate_cure_cmap(['#711391', '#FFFFF3', '#D0D6FF', '#06FCD5'], ['キュアイーグレット', 'Cure Egret'])        
+        self.cure_windy = self.generate_cure_cmap(['#741B93', '#D16FE7', '#F8F8F8', '#DFFFFF', '#01FEDE', '#FFF3FD', '#FDB2E1'], ['キュアウインディ', 'Cure Windy']) # 東映公式に大きめの画像がない？ # https://www.asahi.co.jp/precure_ss/character/img/cw.gif
+        self.kaoru_kiryuu = self.generate_cure_cmap(['#275D8A', '#DDECF1', '#E7F5FD', '#DDB9CB', '#CC87BB'], ['霧生薫', 'Kaoru Kiryuu']) # https://lohas.nicoseiga.jp/thumb/8016685i?1522857603
+        self.michiru_kiryuu = self.generate_cure_cmap(['#8D2045', '#DC98A9', '#C5E462', '#FFEE2C', '#F9FA9B', '#C11E7A'], ['霧生満', 'Michiru Kiryuu']) # https://lohas.nicoseiga.jp/thumb/8016685i?1522857603
 
         ##### TODO：未作成
         # Yes!プリキュア5
@@ -475,7 +439,7 @@ class cure_colormap :
         Parameter
         ---------
         colors : array of color hexcode
-            色を16進数表記した文字列を格納した配列を指定してください。
+            色の配列。色は16進数数か色名で指定。
 
         Return
         ------
@@ -490,6 +454,53 @@ class cure_colormap :
         for v, c in zip(values, colors):
             color_list.append( ( v / vmax, c) )
         return LinearSegmentedColormap.from_list('custom_cmap', color_list)
+    
+    def generate_cmap_q(self, colors) :
+        '''
+        指定した色で、Qualitative(質的)なカラーマップを生成して返す
+        
+        Parameter
+        ---------
+        colors : array of color hexcode
+        色の配列。色は16進数数か色名で指定。
+
+        Return
+        ------
+        matplotlib.colors.Colormap object かな？
+        
+        '''
+        return ListedColormap(sns.color_palette(colors).as_hex())
+
+    def generate_cure_cmap(self, colors, names, method=None):
+        '''
+        指定した配色でカラーマップを生成し、
+        プリキュアの名称と対応付ける
+        
+        Parameters
+        ---------
+        colors : array of color (hexcode or color name) [in]
+            色の配列。色は16進数数か色名で指定。
+        
+        names : array of string [in]
+            プリキュアの名前。
+
+        method : function [in]
+            カラーマップを生成する関数。matplotlib.colors.Colormap を返すもの。
+            generate_cmap か generate_cmap_q
+
+        Returns
+        ------
+        matplotlib.colors.Colormap 
+            プリキュアカラーマップのオブジェクト。
+        '''
+        if method is None:
+            method = self.generate_cmap
+        
+        cmap = method(colors)
+        for name in names:
+            self.name_to_cmap[name] = cmap
+        
+        return cmap
 
     def sample_all_colormap(self):
         '''
@@ -699,6 +710,9 @@ class test_cure_colormap() :
     cure_colors = cure_colormap()
     
     def test_cure_colormap(self):
+        # カラーマップ生成関数 # 決め打ちだけど同じテーブルを渡す
+        cmap = self.cure_colors.generate_cure_cmap(['#000395', '#F4F4F4', '#FFC7B8', '#904B2C', '#B2987F', '#FF3398'], ['キュアブラック', 'Cure Black'], method=self.cure_colors.generate_cmap_q)
+        assert cmap.colors == self.cure_colors.cure_black.colors, 'Failed to generate_cure_cmap(Cure Brack)'
         # メンバ直打ち
         assert self.cure_colors.cure_twinkle is not None, "ERROR: cure_colors.cure_twinkle is None" 
         # 名前で呼ぶ
