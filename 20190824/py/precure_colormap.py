@@ -3,21 +3,6 @@
 
 # Pythonで使えるプリキュアっぽいカラーマップを作ってみました。
 # 
-# # カラーマップについて
-
-# 
-# Pythonで、グラフの表示を行うパッケージ `matplotib` や `seaborn` では、
-# 配色を
-# 
-#  * 定義されたカラーマップ名
-#  * カラーマップクラス `matplotlib.colors.Colormap` のインスタンス
-#  
-# で指定できます。 
-# まずは、デフォルトで定義済みのカラーマップを見ていきましょう。
-# 
-
-# ## デフォルトのカラーマップ
-# 
 
 # In[ ]:
 
@@ -29,10 +14,14 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 # colormapをカスタマイズする
 from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.colors import ListedColormap
+
 import seaborn as sns
 
-get_ipython().magic('matplotlib inline')
-
+try:
+    get_ipython().magic('matplotlib inline')
+except:
+    pass
 
 # スタイル設定
 # style="whitegrid"：白背景＋グリッド
@@ -50,13 +39,10 @@ sns.set(style="whitegrid", color_codes=True)
 # プリキュアの魔法で、クラス `cure_colormap` が生み出されたようです。 
 # 
 # プリキュアの名前を呼ぶと、プリキュアっぽいカラーマップが返ってくるみたい！ワクワクもんだぁ！
+# 「名前を呼ぶと」って言ってるんで、　インターフェースも要りますねえ
 # 
 
 # In[ ]:
-
-
-from matplotlib.colors import ListedColormap
-
 
 class cure_colormap :
     '''
@@ -81,78 +67,44 @@ class cure_colormap :
         self.name_to_cmap = dict()
 
         # ふたりはプリキュア
-        # self.cure_black = self.generate_cmap(['#00072A', '#F4F4F4', '#FFC7B8', '#904B2C', '#B2987F', '#FF3398']) # https://pictones.firebaseapp.com/ × http://www.toei-anim.co.jp/movie/2013_precure_allstars/images/futari1.jpg 
-        #self.cure_black = self.generate_cmap_q(['#00072A', '#F4F4F4', '#FFC7B8', '#904B2C', '#B2987F', '#FF3398']) # https://pictones.firebaseapp.com/ × http://www.toei-anim.co.jp/movie/2013_precure_allstars/images/futari1.jpg 
-        #self.name_to_cmap['キュアブラック'] = self.cure_black
-        #self.name_to_cmap['Cure Black'] = self.cure_black
-        self.cure_black = self.generate_cure_cmap(['#000395', '#F4F4F4', '#FFC7B8', '#904B2C', '#B2987F', '#FF3398'], ['キュアブラック', 'Cure Black'], method=self.generate_cmap_q) # TODO まだ何か違う
-        self.cure_white = self.generate_cure_cmap(['#F4F4F4', '#FBD6CE', '#0099FF', '#66CCFC', '#05030E', '#726DA3'], ['キュアホワイト', 'Cure White'], method=self.generate_cmap_q) # TODO 違う気がする
+        # self.cure_black = self.generate_cure_cmap(['#00072A', '#00072A', '#842C72', '#FBFBFB', '#D49033', '#FF3398'], ['キュアブラック', 'Cure Black'], method=self.generate_cmap_q)
+        self.cure_black = self.generate_cure_cmap(['#00072A', '#00072A', '#FBFBFB', '#FF3398', '#6e4001'], ['キュアブラック', 'Cure Black']) # TODO まだ何か違う
+        # self.cure_white = self.generate_cure_cmap(['#F4F4F4', '#F4F4F4', '#78DDE4', '#0365B5', '#120c4f'], ['キュアホワイト', 'Cure White'], method=self.generate_cmap_q)
+        self.cure_white = self.generate_cure_cmap(['#F4F4F4', '#F4F4F4', '#78DDE4', '#0365B5', '#120c4f'], ['キュアホワイト', 'Cure White']) # TODO 違う気がする
 
         # ふたりはプリキュア Max Heart
         self.shiny_luminous = self.generate_cure_cmap(['#FECF04', '#FEFB53', '#F5F7F7', '#FEB1D1', '#FE3521'], ['シャイニールミナス', 'Shiny Luminous'])
 
         # ふたりはプリキュア Splash Star
         self.cure_bloom = self.generate_cure_cmap(['#FCAC35', '#FFFF8E', '#FF3292', '#942953'], ['キュアブルーム', 'Cure Bloom'])
-        self.cure_bright = self.generate_cure_cmap(['#FDAD38', '#FBCF84', '#FFFFA6', '#F0E947', '#97F518', '#FFFFDF', '#F93B9A', '#DC0067'], ['キュアブライト', 'Cure Bright']) # 東映公式に大きめの画像がない？ # https://www.asahi.co.jp/precure_ss/character/img/cb.gif
+        self.cure_bright = self.generate_cure_cmap(['#FDAD38', '#FBCF84', '#FFFFA6', '#F0E947', '#97F518', '#FFFFDF', '#F93B9A', '#DC0067', '#942953'], ['キュアブライト', 'Cure Bright']) # 東映公式に大きめの画像がない？ # https://www.asahi.co.jp/precure_ss/character/img/cb.gif
+        # '#FFFFDF', いらないきがする(未検証)
         self.cure_eglet = self.generate_cure_cmap(['#711391', '#FFFFF3', '#D0D6FF', '#06FCD5'], ['キュアイーグレット', 'Cure Egret'])        
-        self.cure_windy = self.generate_cure_cmap(['#741B93', '#D16FE7', '#F8F8F8', '#DFFFFF', '#01FEDE', '#FFF3FD', '#FDB2E1'], ['キュアウインディ', 'Cure Windy']) # 東映公式に大きめの画像がない？ # https://www.asahi.co.jp/precure_ss/character/img/cw.gif
+        self.cure_windy = self.generate_cure_cmap(['#741B93', '#711391', '#D16FE7', '#F8F8F8', '#FFF3FD', '#FDB2E1', '#DFFFFF', '#01FEDE'], ['キュアウインディ', 'Cure Windy']) # 東映公式に大きめの画像がない？ # https://www.asahi.co.jp/precure_ss/character/img/cw.gif
         self.kaoru_kiryuu = self.generate_cure_cmap(['#275D8A', '#DDECF1', '#E7F5FD', '#DDB9CB', '#CC87BB'], ['霧生薫', 'Kaoru Kiryuu']) # https://lohas.nicoseiga.jp/thumb/8016685i?1522857603
         self.michiru_kiryuu = self.generate_cure_cmap(['#8D2045', '#DC98A9', '#C5E462', '#FFEE2C', '#F9FA9B', '#C11E7A'], ['霧生満', 'Michiru Kiryuu']) # https://lohas.nicoseiga.jp/thumb/8016685i?1522857603
 
-        ##### TODO：未作成
         # Yes!プリキュア5
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
+        self.cure_dream = self.generate_cure_cmap(['#A6366B', '#F14694', '#FFB8F9', '#FFFBCD', '#FFFBCD', '#ECD01B'], ['キュアドリーム', 'Cure Dream'])
+        self.cure_rouge = self.generate_cure_cmap(['#D34B32', '#EC9689', '#EC9689', '#FCEDFD', '#FCEDFD', '#FF1EA9'], ['キュアルージュ', 'Cure Rouge']) # 紫を入れたい #680CB1
+        self.cure_lemonade = self.generate_cure_cmap(['#D8A725', '#FFEE9E', '#FAF4C2', '#FDFDF7', '#FAC04D', '#E39B14'], ['キュアレモネード', 'Cure Lemonade'])
+        self.cure_mint = self.generate_cure_cmap(['#029476', '#55E5CD', '#FFFFF0', '#21AA03'], ['キュアミント', 'Cure Mint'])
+        self.cure_aqua = self.generate_cure_cmap(['#1452A4', '#B3D3FE', '#F2FDFD', '#0974CC', '#3C3DA3'], ['キュアアクア', 'Cure Aqua'])
+        
+        self.dark_dream = self.generate_cure_cmap(['#D02674', '#F9D1EC', '#313144', '#000000'], ['ダークドリーム', 'Dark Dream'])
+        self.dark_rouge = self.generate_cure_cmap(['#A92E3F', '#F8C8D6', '#313144', '#000000'], ['ダークルージュ', 'Dark Rouge'])
+        self.dark_remonade = self.generate_cure_cmap(['#AB7221', '#FCD516', '#313144', '#000000'], ['ダークレモネード', 'Dark Lemonade'])
+        self.dark_mint = self.generate_cure_cmap(['#05A67C', '#E1FEEF', '#313144', '#000000'], ['ダークミント', 'Dark Mint'])
+        self.dark_aqua = self.generate_cure_cmap(['#366CCB', '#B9E8F8', '#313144', '#000000'], ['ダークアクア', 'Dark Aqua'])
 
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-        [
-            'Cure Dream',
-            'Cure Rouge',
-            'Cure Lemonade',
-            'Cure Mint',
-            'Cure Aqua'
-        ]
-
-        ##### TODO：未作成
         # Yes!プリキュア5GoGo!
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-        'Milky Rose'
+        self.milky_rose = self.generate_cure_cmap(['#9136cf', '#CA2DA2', '#E7C8F9', '#B4EBEA', '#0386F3'], ['ミルキィローズ', 'Milky Rose'])
 
-
-        ##### TODO：未作成
         # フレッシュプリキュア!
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
+        self.cure_peach = self.generate_cure_cmap(['#953678', '#DC3E72', '#FF8ABF', '#FFF4AC'], ['キュアピーチ', 'Cure Peach'])
+        self.cure_berry = self.generate_cure_cmap(['#353A57', '#2E7DCA', '#6AB7FE', '#C7B3FA'], ['キュアベリー', 'Cure Berry'])
+        self.cure_pine = self.generate_cure_cmap(['#9B4750', '#FD8E18', '#FFDA5C', '#DB7A45'], ['キュアパイン', 'Cure Pine'])
+        self.cure_passion = self.generate_cure_cmap(['#242B33', '#8E0331', '#DA2A3D', '#FFCBE5'], ['キュアパッション', 'Cure Passion'])
         [
             'Cure Peach',
             'Cure Berry',
@@ -162,21 +114,10 @@ class cure_colormap :
         
         ##### TODO：未作成
         # スイートプリキュア♪
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
         [
             'Cure Melody',
             'Cure Rhythm',
@@ -187,145 +128,72 @@ class cure_colormap :
         
         ##### TODO：未作成
         # ハートキャッチプリキュア！
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
         [
             'Cure Blossom',
             'Cure Marine',
             'Cure Sunshine',
-            'Cure Moonlight'
+            'Cure Moonlight',
+            'Cure Frower',
+            'Dark Precure'
         ]
 
         ##### TODO：未作成
         # スマイルプリキュア!
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
         [
             'Cure Happy',
             'Cure Sunny',
             'Cure Peace',
             'Cure March',
             'Cure Beauty',
-
         ]
 
 
         # ドキドキ!プリキュア
-        self.cure_heart = self.generate_cmap(['#D4A615', '#FFF99E', '#FAFAFA', '#FAB1E2', '#EC3C9C'])
-        self.name_to_cmap[''] = self.cure_heart
-        self.name_to_cmap['Cure Heart'] = self.cure_heart
-
-        self.cure_diamond = self.generate_cmap(['#4245AF', '#A8ACF9', '#FAFAFA', '#5791F1', '#597AA7'])
-        self.name_to_cmap[''] = self.cure_diamond
-        self.name_to_cmap['Cure Diamond'] = self.cure_diamond
-
-        self.cure_rosetta = self.generate_cmap(['#B3481E', '#FFC05C', '#FAFAFA', '#C9EFB6', '#F7DB3D'])
-        self.name_to_cmap[''] = self.cure_rosetta
-        self.name_to_cmap['Cure Rosetta'] = self.cure_rosetta
-
-        self.cure_sword = self.generate_cmap(['#AE57B5', '#EEB4F8', '#FAFAFA', '#ADBBF5', '#8B87B2'])
-        self.name_to_cmap[''] = self.cure_sword
-        self.name_to_cmap['Cure Sword'] = self.cure_sword
-
-        self.cure_ace = self.generate_cmap(['#A51318', '#FD757D', '#FFE8EC', '#FAFAFA', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_ace
-        self.name_to_cmap['Cure Ace'] = self.cure_ace
-
-        self.cure_sebastian = self.generate_cmap(['#36424E', '#E0EBF1', '#DB0517', '#DB3FA2', '#F48484'])
-        self.name_to_cmap[''] = self.cure_sebastian
-        self.name_to_cmap['Cure Sebastian'] = self.cure_sebastian
+        self.cure_heart = self.generate_cure_cmap(['#D4A615', '#FFF99E', '#FAFAFA', '#FAB1E2', '#EC3C9C'], ['キュアハート', 'Cure Heart'])
+        self.cure_diamond = self.generate_cure_cmap(['#4245AF', '#A8ACF9', '#FAFAFA', '#5791F1', '#597AA7'], ['', 'Cure Diamond'])
+        self.cure_rosetta = self.generate_cure_cmap(['#B3481E', '#FFC05C', '#FAFAFA', '#C9EFB6', '#F7DB3D'], ['', 'Cure Rosetta'])
+        self.cure_sword = self.generate_cure_cmap(['#AE57B5', '#EEB4F8', '#FAFAFA', '#ADBBF5', '#8B87B2'], ['', 'Cure Sword'])
+        self.cure_ace = self.generate_cure_cmap(['#A51318', '#FD757D', '#FFE8EC', '#FAFAFA', '#FFFFFF'], ['', 'Cure Ace'])
+        self.cure_sebastian = self.generate_cure_cmap(['#36424E', '#E0EBF1', '#DB0517', '#DB3FA2', '#F48484'], ['', 'Cure Sebastian'])
 
         ##### TODO：未作成
         # ハピネスチャージプリキュア!
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
         [
             'Cure Lovely',
             'Cure Princess',
             'Cure Honey',
             'Cure Fortune',
             'Cure Mirage'
-
         ]
         
         # Go!プリンセスプリキュア
-        self.cure_flora = self.generate_cmap(['#DC3482', '#FE8ADA', '#FFF5FD', '#F8F5A2'])
-        self.name_to_cmap['キュアフローラ'] = self.cure_flora
-        self.name_to_cmap['Cure Flora'] = self.cure_flora
-        
-        self.cure_marmaid = self.generate_cmap(['#3C57D8', '#8EE9D8', '#F1FBF2', '#FCC3DD'])
-        self.name_to_cmap['キュアマーメイド'] = self.cure_marmaid
-        self.name_to_cmap['Cure Mermaid'] = self.cure_marmaid
-        
-        self.cure_twinkle = self.generate_cmap(['#F15312', '#FF9A18', '#FDFF94', '#FCE92D', '#BA70F8'])
-        self.name_to_cmap['キュアトゥインクル'] = self.cure_twinkle
-        self.name_to_cmap['Cure Twinkle'] = self.cure_twinkle
-        
-        self.cure_scarlet = self.generate_cmap(['#E73F94', '#FEC8FC', '#F6D437', '#E01646'])
-        self.name_to_cmap['キュアスカーレット'] = self.cure_scarlet
-        self.name_to_cmap['Cure Scarlet'] = self.cure_scarlet
-        
+        self.cure_flora = self.generate_cure_cmap(['#DC3482', '#FE8ADA', '#FFF5FD', '#F8F5A2'], ['キュアフローラ', 'Cure Flora'])
+        self.cure_marmaid = self.generate_cure_cmap(['#3C57D8', '#8EE9D8', '#F1FBF2', '#FCC3DD'], ['キュアマーメイド', 'Cure Mermaid'])
+        self.cure_twinkle = self.generate_cure_cmap(['#F15312', '#FF9A18', '#FDFF94', '#FCE92D', '#BA70F8'], ['キュアトゥインクル', 'Cure Twinkle'])
+        self.cure_scarlet = self.generate_cure_cmap(['#E73F94', '#FEC8FC', '#F6D437', '#E01646'], ['キュアスカーレット', 'Cure Scarlet'])        
 
         ##### TODO：未作成
         # 魔法つかいプリキュア!
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
         [
             'Cure Miracle',
             'Cure Magical',
@@ -335,21 +203,13 @@ class cure_colormap :
 
         ##### TODO：未作成
         # キラキラ☆プリキュアアラモード
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
         [
             'Cure Whip',
             'Cure Custard',
@@ -357,26 +217,18 @@ class cure_colormap :
             'Cure Macaron',
             'Cure Chocolat',
             'Cure Parfait',
-            'Cure Pekorin'
+            'Cure Pekorin'  
         ]
 
         ##### TODO：未作成
         # HUGっと！プリキュア
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
         [
             'Cure Yell',
             'Cure Ange',
@@ -390,28 +242,19 @@ class cure_colormap :
 
         ##### TODO：未作成
         # スター☆トゥインクルプリキュア
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
-
-        self.cure_ = self.generate_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'])
-        self.name_to_cmap[''] = self.cure_
-        self.name_to_cmap[''] = self.cure_
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
+        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
         [
             'Cure Star',
             'Cure Milky',
             'Cure Soleil',
             'Cure Selene',
             'Cure Cosmo',
-
         ]
 
     def get_by_name(self, name):
@@ -555,7 +398,12 @@ class cure_colormap :
             'Cure Rouge',
             'Cure Lemonade',
             'Cure Mint',
-            'Cure Aqua'
+            'Cure Aqua',
+            'Dark Dream',
+            'Dark Rouge',
+            'Dark Lemonade',
+            'Dark Mint',
+            'Dark Aqua'
         ]
 
         # Yes!プリキュア5GoGo!
@@ -710,9 +558,12 @@ class test_cure_colormap() :
     cure_colors = cure_colormap()
     
     def test_cure_colormap(self):
-        # カラーマップ生成関数 # 決め打ちだけど同じテーブルを渡す
-        cmap = self.cure_colors.generate_cure_cmap(['#000395', '#F4F4F4', '#FFC7B8', '#904B2C', '#B2987F', '#FF3398'], ['キュアブラック', 'Cure Black'], method=self.cure_colors.generate_cmap_q)
-        assert cmap.colors == self.cure_colors.cure_black.colors, 'Failed to generate_cure_cmap(Cure Brack)'
+        # カラーマップ生成関数
+        colors = ['black', 'white']
+        cmap = self.cure_colors.generate_cure_cmap(colors, [], method=self.cure_colors.generate_cmap)
+        assert cmap is not None, 'Failed to generate_cure_cmap(method=generate_cmap)'
+        cmap_q = self.cure_colors.generate_cure_cmap(colors, [], method=self.cure_colors.generate_cmap_q)
+        assert cmap_q is not None, 'Failed to generate_cure_cmap(method=generate_cmap_q)'
         # メンバ直打ち
         assert self.cure_colors.cure_twinkle is not None, "ERROR: cure_colors.cure_twinkle is None" 
         # 名前で呼ぶ
@@ -801,7 +652,6 @@ test.test_sample_all_colormap()
 #    * 見落としていた先行研究。ありがたい！
 # 
 
-# In[ ]:
 
 
-
+#%%
