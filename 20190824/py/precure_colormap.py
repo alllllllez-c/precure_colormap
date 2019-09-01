@@ -105,43 +105,20 @@ class cure_colormap :
         self.cure_berry = self.generate_cure_cmap(['#353A57', '#2E7DCA', '#6AB7FE', '#C7B3FA'], ['キュアベリー', 'Cure Berry'])
         self.cure_pine = self.generate_cure_cmap(['#9B4750', '#FD8E18', '#FFDA5C', '#DB7A45'], ['キュアパイン', 'Cure Pine'])
         self.cure_passion = self.generate_cure_cmap(['#242B33', '#8E0331', '#DA2A3D', '#FFCBE5'], ['キュアパッション', 'Cure Passion'])
-        [
-            'Cure Peach',
-            'Cure Berry',
-            'Cure Pine',
-            'Cure Passion'
-        ]
         
-        ##### TODO：未作成
-        # スイートプリキュア♪
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        [
-            'Cure Melody',
-            'Cure Rhythm',
-            'Cure Beat',
-            'Cure Muse'
-        ]
-
-        
-        ##### TODO：未作成
         # ハートキャッチプリキュア！
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        [
-            'Cure Blossom',
-            'Cure Marine',
-            'Cure Sunshine',
-            'Cure Moonlight',
-            'Cure Frower',
-            'Dark Precure'
-        ]
+        self.cure_blossom = self.generate_cure_cmap(['#cf1b71', '#F954BD', '#FD98D7', '#FEF3FE'], ['キュアブロッサム', 'Cure Blossom'])
+        self.cure_marine = self.generate_cure_cmap(['#4A7AED', '#6EB2F1', '#63DEED', '#EFFAFF'], ['キュアマリン', 'Cure Marine'])
+        self.cure_sunshine = self.generate_cure_cmap(['#F98435', '#FFAC05', '#FFE55C', '#DD991D'], ['キュアサンシャイン', 'Cure Sunshine'])
+        self.cure_moonlight = self.generate_cure_cmap(['#404A8F', '#6F7FDE', '#CDD5E2', '#D0B0D9'], ['キュアムーンライト', 'Cure Moonlight'])
+        self.cure_flower = self.generate_cure_cmap(['#CE7AAE', '#F8D1EC', '#F9FCBF', '#FD9CBF', '#CB1C55'], ['キュアフラワー', 'Cure Flower']) # https://www.asahi.co.jp/heartcatch_precure/img/character/photo/flower.png
+        self.dark_precure = self.generate_cure_cmap(['#171717', '#042F36', '#A6D8C6', '#FDA4BE', '#980E13'], ['ダークプリキュア', 'Dark Precure'])
+        
+        # スイートプリキュア♪
+        self.cure_melody = self.generate_cure_cmap(['#DC3688', '#FF78C4', '#F9A5C9', '#FFFFFF'], ['キュアメロディ', 'Cure Melody'])
+        self.cure_rhythm = self.generate_cure_cmap(['#D0A947', '#FDF48B', '#FAB7E5', '#FFFFFF'], ['キュアリズム', 'Cure Rhythm']) # まだやりようがある ＃ 
+        self.cure_beat = self.generate_cure_cmap(['#303277', '#728CF1', '#C2EBFC', '#D393F8', '#FFFFFF'], ['キュアビート', 'Cure Beat'])
+        self.cure_muse = self.generate_cure_cmap(['#C86424', '#FFAC4E', '#FACC2A', '#FFFB52', '#FFFFFF'], ['キュアミューズ', 'Cure Muse'])
 
         ##### TODO：未作成
         # スマイルプリキュア!
@@ -339,6 +316,9 @@ class cure_colormap :
         if method is None:
             method = self.generate_cmap
         
+        if len(colors) < 1:
+            return None
+        
         cmap = method(colors)
         for name in names:
             self.name_to_cmap[name] = cmap
@@ -429,7 +409,9 @@ class cure_colormap :
             'Cure Blossom',
             'Cure Marine',
             'Cure Sunshine',
-            'Cure Moonlight'
+            'Cure Moonlight',
+            'Cure Flower',
+            'Dark Precure'
         ]
 
         # スイートプリキュア♪
@@ -525,7 +507,8 @@ class cure_colormap :
 
         def plot_color_maps(cmap_category, cmap_list):
             '''
-            
+            指定したカラーマップを一覧表示する。表示の際「カテゴリ名」を掲出
+
             '''
             num_cmaps = len(cmap_list)
             fig, axes = plt.subplots(num_cmaps, 1, figsize=(9, num_cmaps * 0.35))
@@ -559,6 +542,9 @@ class test_cure_colormap() :
     
     def test_cure_colormap(self):
         # カラーマップ生成関数
+        cmap = self.cure_colors.generate_cure_cmap([], [])
+        assert cmap is None, 'Failed to generate_cure_cmap([], [])'
+         # ちゃんと引数でテストして？
         colors = ['black', 'white']
         cmap = self.cure_colors.generate_cure_cmap(colors, [], method=self.cure_colors.generate_cmap)
         assert cmap is not None, 'Failed to generate_cure_cmap(method=generate_cmap)'
