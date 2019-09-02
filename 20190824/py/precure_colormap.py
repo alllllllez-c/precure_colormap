@@ -10,8 +10,10 @@
 import numpy as np
 import pandas as pd
 
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+
 # colormapをカスタマイズする
 from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.colors import ListedColormap
@@ -120,21 +122,12 @@ class cure_colormap :
         self.cure_beat = self.generate_cure_cmap(['#303277', '#728CF1', '#C2EBFC', '#D393F8', '#FFFFFF'], ['キュアビート', 'Cure Beat'])
         self.cure_muse = self.generate_cure_cmap(['#C86424', '#FFAC4E', '#FACC2A', '#FFFB52', '#FFFFFF'], ['キュアミューズ', 'Cure Muse'])
 
-        ##### TODO：未作成
         # スマイルプリキュア!
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        [
-            'Cure Happy',
-            'Cure Sunny',
-            'Cure Peace',
-            'Cure March',
-            'Cure Beauty',
-        ]
-
+        self.cure_happy = self.generate_cure_cmap(['#A62169', '#EB4CB0', '#FFFFFF', '#FFFD9F', '#A68506'], ['キュアハッピー', 'Cure Happy'])
+        self.cure_sunny = self.generate_cure_cmap(['#A42C04', '#F95000', '#FEE285', '#FCDE06', '#A68506'], ['キュアサニー', 'Cure Sunny'])
+        self.cure_peace = self.generate_cure_cmap(['#F39900', '#FFFFEE', '#FDE552', '#D3A502', '#A68506'], ['キュアピース', 'Cure Peace'])
+        self.cure_march = self.generate_cure_cmap(['#208635', '#4DDC50', '#F3FED6', '#FAEA65', '#A68506'], ['キュアマーチ', 'Cure March'])
+        self.cure_beauty = self.generate_cure_cmap(['#3135A5', '#86A6FF', '#DAE7FA', '#A68506'], ['キュアビューティ', 'Cure Beauty'])
 
         # ドキドキ!プリキュア
         self.cure_heart = self.generate_cure_cmap(['#D4A615', '#FFF99E', '#FAFAFA', '#FAB1E2', '#EC3C9C'], ['キュアハート', 'Cure Heart'])
@@ -325,7 +318,197 @@ class cure_colormap :
         
         return cmap
 
-    def sample_all_colormap(self):
+    from collections import OrderedDict
+    # 作品タイトルと登場プリキュアのマップ
+    title_maps = OrderedDict()
+    # ふたりはプリキュア
+    title_maps['Futari wa Pretty Cure'] = [
+        'Cure Black',
+        'Cure White'
+    ]
+
+    # ふたりはプリキュア Max Heart
+    title_maps['Futari wa Pretty Cure Max Heart'] = [
+        'Cure Black',
+        'Cure White',
+        'Shiny Luminous'
+    ]
+
+    # ふたりはプリキュア Splash Star
+    title_maps['Futari wa Pretty Cure Splash Star'] = [
+        'Cure Bloom',
+        'Cure Bright',
+        'Cure Egret',
+        'Cure Windy',
+        'Kaoru Kiryuu', #霧生薫
+        'Michiru Kiryuu', #霧生満
+    ]
+
+    # Yes!プリキュア5
+    title_maps['Yes! PreCure 5'] = [
+        'Cure Dream',
+        'Cure Rouge',
+        'Cure Lemonade',
+        'Cure Mint',
+        'Cure Aqua',
+        'Dark Dream',
+        'Dark Rouge',
+        'Dark Lemonade',
+        'Dark Mint',
+        'Dark Aqua'
+    ]
+
+    # Yes!プリキュア5GoGo!
+    title_maps['Yes! PreCure 5 GoGo!'] = [
+        'Cure Dream',
+        'Cure Rouge',
+        'Cure Lemonade',
+        'Cure Mint',
+        'Cure Aqua',
+        'Milky Rose'
+    ]
+
+    # フレッシュプリキュア!
+    title_maps['Fresh Pretty Cure!'] = [
+        'Cure Peach',
+        'Cure Berry',
+        'Cure Pine',
+        'Cure Passion'
+    ]
+
+    # ハートキャッチプリキュア！
+    title_maps['HeartCatch PreCure!'] = [
+        'Cure Blossom',
+        'Cure Marine',
+        'Cure Sunshine',
+        'Cure Moonlight',
+        'Cure Flower',
+        'Dark Precure'
+    ]
+
+    # スイートプリキュア♪
+    title_maps['Suite PreCure'] = [
+        'Cure Melody',
+        'Cure Rhythm',
+        'Cure Beat',
+        'Cure Muse'
+    ]
+
+    # スマイルプリキュア!
+    title_maps['Smile PreCure!'] = [
+        'Cure Happy',
+        'Cure Sunny',
+        'Cure Peace',
+        'Cure March',
+        'Cure Beauty',
+
+    ]
+
+    # ドキドキ!プリキュア
+    title_maps['DokiDoki! PreCure'] = [
+        'Cure Heart',
+        'Cure Diamond',
+        'Cure Rosetta',
+        'Cure Sword',
+        'Cure Ace',
+        'Cure Sebastian',
+
+    ]
+
+    # ハピネスチャージプリキュア!
+    title_maps['HappinessCharge PreCure!'] = [
+        'Cure Lovely',
+        'Cure Princess',
+        'Cure Honey',
+        'Cure Fortune',
+        'Cure Mirage'
+
+    ]
+
+    # Go!プリンセスプリキュア
+    title_maps['Go! Princess PreCure'] = [
+        'Cure Flora',
+        'Cure Mermaid',
+        'Cure Twinkle',
+        'Cure Scarlet'
+    ]
+
+    # 魔法つかいプリキュア!
+    title_maps['Witchy PreCure!'] = [
+        'Cure Miracle',
+        'Cure Magical',
+        'Cure Felice',
+        'Cure Mofurun'
+    ]
+
+    # キラキラ☆プリキュアアラモード
+    title_maps['Kirakira PreCure a la Mode'] = [
+        'Cure Whip',
+        'Cure Custard',
+        'Cure Gelato',
+        'Cure Macaron',
+        'Cure Chocolat',
+        'Cure Parfait',
+        'Cure Pekorin'
+    ]
+
+    # HUGっと！プリキュア
+    title_maps['Hugtto! PreCure'] = [
+        'Cure Yell',
+        'Cure Ange',
+        'Cure Etoile',
+        'Cure Macherie',
+        'Cure Amour',
+        'Cure Tomorrow'
+
+    ]
+
+    # スター☆トゥインクルプリキュア
+    title_maps['Star Twinkle PreCure'] = [
+        'Cure Star',
+        'Cure Milky',
+        'Cure Soleil',
+        'Cure Selene',
+        'Cure Cosmo',
+
+    ]
+
+    def plot_color_maps(self, cmap_category, cmap_list):
+        '''
+        指定したカラーマップを一覧表示する。表示の際「カテゴリ名」を掲出
+
+        '''
+        # 表示するデータとして (1, 256) の配列を作成する。
+        gradient = np.linspace(0, 1, 256).reshape(1, -1)
+
+        cure_colors = self
+        num_title_maps = len(cmap_list)
+        fig, axes = plt.subplots(num_title_maps, 1, figsize=(9, num_title_maps * 0.35))
+        fig.subplots_adjust(wspace=0.4)
+        axes[0].set_title(cmap_category + ' colormaps', fontsize=14, x=0.5)
+        
+        def plot_color_map(ax, gradient, name):
+            cmap = cure_colors.get_by_name(name) 
+            if cmap is None:
+                return
+            
+            ax.imshow(gradient, aspect='auto', cmap=cmap)
+            ax.set_axis_off()
+            ax.text(-10, 0, name, va='center', ha='right', fontsize=10)
+        
+        for ax, name in zip(axes, cmap_list):
+            plot_color_map(ax, gradient, name)
+            # plot_color_map(axR, gradient, name + '_r') # 逆向きは作っていないので、上の表示も順方向だけのものに変更
+
+    def sample_colormap_by_title(self, titles):
+        '''
+        指定した作品のカラーマップを表示
+        '''
+        for cmap_category, cmap_list in self.title_maps.items():
+            if cmap_category in titles:
+                self.plot_color_maps(cmap_category, cmap_list)
+
+    def sample_colormap_all(self):
         '''
         全カラーマップ表示
 
@@ -339,197 +522,8 @@ class cure_colormap :
 
         '''
         
-        import numpy as np
-        import matplotlib as mpl
-        import matplotlib.pyplot as plt
-        from matplotlib import cm
-        from collections import OrderedDict
-
-
-        cure_colors = self
-        cmaps = OrderedDict()
-
-        # ふたりはプリキュア
-        cmaps['Futari wa Pretty Cure'] = [
-            'Cure Black',
-            'Cure White'
-        ]
-
-        # ふたりはプリキュア Max Heart
-        cmaps['Futari wa Pretty Cure Max Heart'] = [
-            'Cure Black',
-            'Cure White',
-            'Shiny Luminous'
-        ]
-
-        # ふたりはプリキュア Splash Star
-        cmaps['Futari wa Pretty Cure Splash Star'] = [
-            'Cure Bloom',
-            'Cure Bright',
-            'Cure Egret',
-            'Cure Windy',
-            'Kaoru Kiryuu', #霧生薫
-            'Michiru Kiryuu', #霧生満
-        ]
-
-        # Yes!プリキュア5
-        cmaps['Yes! PreCure 5'] = [
-            'Cure Dream',
-            'Cure Rouge',
-            'Cure Lemonade',
-            'Cure Mint',
-            'Cure Aqua',
-            'Dark Dream',
-            'Dark Rouge',
-            'Dark Lemonade',
-            'Dark Mint',
-            'Dark Aqua'
-        ]
-
-        # Yes!プリキュア5GoGo!
-        cmaps['Yes! PreCure 5 GoGo!'] = [
-            'Cure Dream',
-            'Cure Rouge',
-            'Cure Lemonade',
-            'Cure Mint',
-            'Cure Aqua',
-            'Milky Rose'
-        ]
-
-        # フレッシュプリキュア!
-        cmaps['Fresh Pretty Cure!'] = [
-            'Cure Peach',
-            'Cure Berry',
-            'Cure Pine',
-            'Cure Passion'
-        ]
-
-        # ハートキャッチプリキュア！
-        cmaps['HeartCatch PreCure!'] = [
-            'Cure Blossom',
-            'Cure Marine',
-            'Cure Sunshine',
-            'Cure Moonlight',
-            'Cure Flower',
-            'Dark Precure'
-        ]
-
-        # スイートプリキュア♪
-        cmaps['Suite PreCure'] = [
-            'Cure Melody',
-            'Cure Rhythm',
-            'Cure Beat',
-            'Cure Muse'
-        ]
-
-        # スマイルプリキュア!
-        cmaps['Smile PreCure!'] = [
-            'Cure Happy',
-            'Cure Sunny',
-            'Cure Peace',
-            'Cure March',
-            'Cure Beauty',
-
-        ]
-
-        # ドキドキ!プリキュア
-        cmaps['DokiDoki! PreCure'] = [
-            'Cure Heart',
-            'Cure Diamond',
-            'Cure Rosetta',
-            'Cure Sword',
-            'Cure Ace',
-            'Cure Sebastian',
-
-        ]
-
-        # ハピネスチャージプリキュア!
-        cmaps['HappinessCharge PreCure!'] = [
-            'Cure Lovely',
-            'Cure Princess',
-            'Cure Honey',
-            'Cure Fortune',
-            'Cure Mirage'
-
-        ]
-
-        # Go!プリンセスプリキュア
-        cmaps['Go! Princess PreCure'] = [
-            'Cure Flora',
-            'Cure Mermaid',
-            'Cure Twinkle',
-            'Cure Scarlet'
-        ]
-
-        # 魔法つかいプリキュア!
-        cmaps['Witchy PreCure!'] = [
-            'Cure Miracle',
-            'Cure Magical',
-            'Cure Felice',
-            'Cure Mofurun'
-        ]
-
-        # キラキラ☆プリキュアアラモード
-        cmaps['Kirakira PreCure a la Mode'] = [
-            'Cure Whip',
-            'Cure Custard',
-            'Cure Gelato',
-            'Cure Macaron',
-            'Cure Chocolat',
-            'Cure Parfait',
-            'Cure Pekorin'
-        ]
-
-        # HUGっと！プリキュア
-        cmaps['Hugtto! PreCure'] = [
-            'Cure Yell',
-            'Cure Ange',
-            'Cure Etoile',
-            'Cure Macherie',
-            'Cure Amour',
-            'Cure Tomorrow'
-
-        ]
-
-        # スター☆トゥインクルプリキュア
-        cmaps['Star Twinkle PreCure'] = [
-            'Cure Star',
-            'Cure Milky',
-            'Cure Soleil',
-            'Cure Selene',
-            'Cure Cosmo',
-
-        ]
-
-
-        # 表示するデータとして (1, 256) の配列を作成する。
-        gradient = np.linspace(0, 1, 256).reshape(1, -1)
-
-        def plot_color_maps(cmap_category, cmap_list):
-            '''
-            指定したカラーマップを一覧表示する。表示の際「カテゴリ名」を掲出
-
-            '''
-            num_cmaps = len(cmap_list)
-            fig, axes = plt.subplots(num_cmaps, 1, figsize=(9, num_cmaps * 0.35))
-            fig.subplots_adjust(wspace=0.4)
-            axes[0].set_title(cmap_category + ' colormaps', fontsize=14, x=0.5)
-            
-            def plot_color_map(ax, gradient, name):
-                cmap = cure_colors.get_by_name(name) 
-                if cmap is None:
-                    return
-                
-                ax.imshow(gradient, aspect='auto', cmap=cmap)
-                ax.set_axis_off()
-                ax.text(-10, 0, name, va='center', ha='right', fontsize=10)
-            
-            for ax, name in zip(axes, cmap_list):
-                plot_color_map(ax, gradient, name)
-                # plot_color_map(axR, gradient, name + '_r') # 逆向きは作っていないので、上の表示も順方向だけのものに変更
-
-        for cmap_category, cmap_list in cmaps.items():
-            plot_color_maps(cmap_category, cmap_list)
+        for cmap_category, cmap_list in self.title_maps.items():
+            self.plot_color_maps(cmap_category, cmap_list)
 
         plt.show()
 
@@ -557,8 +551,11 @@ class test_cure_colormap() :
         # Noneに軟着陸する
         assert self.cure_colors.get_by_name('キュアゴリラ') is None, "ERROR: cure_colors.get_by_name('キュアゴリラ') is None"
 
-    def test_sample_all_colormap(self):
-        self.cure_colors.sample_all_colormap()
+    def test_sample_colormap_all(self):
+        self.cure_colors.sample_colormap_all()
+
+    def test_sample_colormap_by_title(self, categories):
+        self.cure_colors.sample_colormap_by_title(categories)
 
     def test_sample_iris(self):
         from sklearn import datasets
@@ -602,7 +599,8 @@ class test_cure_colormap() :
 
 test = test_cure_colormap()
 test.test_cure_colormap()
-test.test_sample_all_colormap()
+test.test_sample_colormap_all()
+# test.test_sample_colormap_by_title(['Smile Precure!'])
 #test.test_sample_iris()
 
 
