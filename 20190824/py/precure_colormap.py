@@ -139,21 +139,14 @@ class cure_colormap :
         self.cure_ace = self.generate_cure_cmap(['#A51318', '#FD757D', '#FFE8EC', '#FAFAFA', '#FFFFFF'], ['キュアハート', 'Cure Ace'])
         self.cure_sebastian = self.generate_cure_cmap(['#36424E', '#E0EBF1', '#DB0517', '#DB3FA2', '#F48484'], ['キュアセバスチャン', 'Cure Sebastian'])
 
-        ##### TODO：未作成
         # ハピネスチャージプリキュア!
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        [
-            'Cure Lovely',
-            'Cure Princess',
-            'Cure Honey',
-            'Cure Fortune',
-            'Cure Mirage'
-        ]
-        
+        self.cure_lovely = self.generate_cure_cmap(['#B51573', '#FB8DDE', '#FFE7FD', '#334463'], ['キュアラブリー', 'Cure Lovely'])
+        self.cure_princess = self.generate_cure_cmap(['#3C558E', '#BEDBFF', '#FAEFAB', '#334463'], ['キュアプリンセス', 'Cure Princess'])
+        self.cure_honey = self.generate_cure_cmap(['#F3A11E', '#FFD144', '#FFF0CC', '#334463'], ['キュアハニー', 'Cure Honey'])
+        self.cure_fortune = self.generate_cure_cmap(['#756BD8', '#A79AF8', '#EAD3FF', '#334463'], ['キュアフォーチュン', 'Cure Fortune'])
+        self.cure_tender = self.generate_cure_cmap(['#4E567B', '#7A87B4', '#BFBDFE', '#354463'], ['キュアテンダー', 'Cure Tender']) # https://www.asahi.co.jp/precure/happiness/story/backnum_39.html
+        self.cure_mirage = self.generate_cure_cmap(['#E34F4B', '#F06C7A', '#F1C3C6', '#354463'], ['キュアミラージュ', 'Cure Mirage']) # https://blogs.yahoo.co.jp/pkrgn012/folder/519751.html?m=lc&p=1
+
         # Go!プリンセスプリキュア
         self.cure_flora = self.generate_cure_cmap(['#DC3482', '#FE8ADA', '#FFF5FD', '#F8F5A2'], ['キュアフローラ', 'Cure Flora'])
         self.cure_marmaid = self.generate_cure_cmap(['#3C57D8', '#8EE9D8', '#F1FBF2', '#FCC3DD'], ['キュアマーメイド', 'Cure Mermaid'])
@@ -331,8 +324,8 @@ class cure_colormap :
             'Cure Princess',
             'Cure Honey',
             'Cure Fortune',
+            'Cure Tender',
             'Cure Mirage'
-
         ]
 
         # Go!プリンセスプリキュア
@@ -615,7 +608,7 @@ class test_cure_colormap(unittest.TestCase) :
 if __name__ != '__Main__':
     test = test_cure_colormap()
     #test.test_sample_colormap_all()
-    test.test_sample_colormap_by_title(['Smile PreCure!'])
+    test.test_sample_colormap_by_title(['Smile PreCure!', 'HappinessCharge PreCure!'])
     #test.test_sample_iris()
 
 
@@ -657,9 +650,6 @@ if __name__ == '__Main__':
 #    * 見落としていた先行研究。ありがたい！
 # 
 
-
-
-#%%
 
 
 #%%
