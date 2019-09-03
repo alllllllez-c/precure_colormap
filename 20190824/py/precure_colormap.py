@@ -163,13 +163,13 @@ class cure_colormap :
 
         ##### TODO：未作成
         # キラキラ☆プリキュアアラモード
-        self.cure_whip = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアホイップ', 'Cure Whip'])
-        self.cure_custard = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアカスタード', 'Cure Custard'])
-        self.cure_gelato = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアジェラート', 'Cure Gelato'])
-        self.cure_macalon = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアマカロン', 'Cure Macaron'])
-        self.cure_chocolat = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアショコラ', 'Cure Chocolat'])
-        self.cure_parfait = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアパルフェ', 'Cure Parfait'])
-        self.cure_pekorin = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアペコリン', 'Cure Pekorin'])
+        self.cure_whip = self.generate_cure_cmap(['#A40945', '#FF488D', '#FEBDCA', '#F7EEB5'], ['キュアホイップ', 'Cure Whip'])
+        self.cure_custard = self.generate_cure_cmap(['#BB3E26', '#FFF324', '#F9F9CF', '#FD663E'], ['キュアカスタード', 'Cure Custard'])
+        self.cure_gelato = self.generate_cure_cmap(['#5959C9', '#3F6BEC', '#6CCDFF', '#FDFCDB'], ['キュアジェラート', 'Cure Gelato'])
+        self.cure_macalon = self.generate_cure_cmap(['#F528AF', '#8B51D9', '#FBD2ED', '#D166D1'], ['キュアマカロン', 'Cure Macaron'])
+        self.cure_chocolat = self.generate_cure_cmap(['#623114', '#986147', '#D80014', '#FFE9C2'], ['キュアショコラ', 'Cure Chocolat'])
+        self.cure_parfait = self.generate_cure_cmap(['#FFC4EA', '#D21953', '#FF4766', '#FFA523', '#F5F78A', '#55F897', '#4FDBE8'], ['キュアパルフェ', 'Cure Parfait'], method=self.generate_cmap_q)
+        self.cure_pekorin = self.generate_cure_cmap(['#DA064C', '#FF8AB4', '#F5CD5F', '#F3EBC1'], ['キュアペコリン', 'Cure Pekorin'])
 
         ##### TODO：未作成
         # HUGっと！プリキュア
@@ -575,8 +575,8 @@ class test_cure_colormap(unittest.TestCase) :
 # VScode debug
 if __name__ != '__Main__':
     test = test_cure_colormap()
-    test.test_sample_colormap_all()
-    test.test_sample_colormap_by_title(['Witchy PreCure!'])
+    #test.test_sample_colormap_all()
+    test.test_sample_colormap_by_title(['Kirakira PreCure a la Mode'])
     #test.test_sample_iris()
 
 
