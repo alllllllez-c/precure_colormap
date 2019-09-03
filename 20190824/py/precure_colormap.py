@@ -133,11 +133,11 @@ class cure_colormap :
 
         # ドキドキ!プリキュア
         self.cure_heart = self.generate_cure_cmap(['#D4A615', '#FFF99E', '#FAFAFA', '#FAB1E2', '#EC3C9C'], ['キュアハート', 'Cure Heart'])
-        self.cure_diamond = self.generate_cure_cmap(['#4245AF', '#A8ACF9', '#FAFAFA', '#5791F1', '#597AA7'], ['', 'Cure Diamond'])
-        self.cure_rosetta = self.generate_cure_cmap(['#B3481E', '#FFC05C', '#FAFAFA', '#C9EFB6', '#F7DB3D'], ['', 'Cure Rosetta'])
-        self.cure_sword = self.generate_cure_cmap(['#AE57B5', '#EEB4F8', '#FAFAFA', '#ADBBF5', '#8B87B2'], ['', 'Cure Sword'])
-        self.cure_ace = self.generate_cure_cmap(['#A51318', '#FD757D', '#FFE8EC', '#FAFAFA', '#FFFFFF'], ['', 'Cure Ace'])
-        self.cure_sebastian = self.generate_cure_cmap(['#36424E', '#E0EBF1', '#DB0517', '#DB3FA2', '#F48484'], ['', 'Cure Sebastian'])
+        self.cure_diamond = self.generate_cure_cmap(['#4245AF', '#A8ACF9', '#FAFAFA', '#5791F1', '#597AA7'], ['キュアダイヤモンド', 'Cure Diamond'])
+        self.cure_rosetta = self.generate_cure_cmap(['#B3481E', '#FFC05C', '#FAFAFA', '#C9EFB6', '#F7DB3D'], ['キュアロゼッタ', 'Cure Rosetta'])
+        self.cure_sword = self.generate_cure_cmap(['#AE57B5', '#EEB4F8', '#FAFAFA', '#ADBBF5', '#8B87B2'], ['キュアソード', 'Cure Sword'])
+        self.cure_ace = self.generate_cure_cmap(['#A51318', '#FD757D', '#FFE8EC', '#FAFAFA', '#FFFFFF'], ['キュアハート', 'Cure Ace'])
+        self.cure_sebastian = self.generate_cure_cmap(['#36424E', '#E0EBF1', '#DB0517', '#DB3FA2', '#F48484'], ['キュアセバスチャン', 'Cure Sebastian'])
 
         ##### TODO：未作成
         # ハピネスチャージプリキュア!
