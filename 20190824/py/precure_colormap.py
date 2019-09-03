@@ -56,6 +56,9 @@ class cure_colormap :
     name_to_cmap : dictionary object
         プリキュアの名称 -> colormap への対応
     
+    title_to_characters : OrderedDict object
+       作品タイトルと登場プリキュアのマップ
+    
     cure_black
     cure_white
     shiny_luminous
@@ -161,59 +164,32 @@ class cure_colormap :
 
         ##### TODO：未作成
         # キラキラ☆プリキュアアラモード
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        [
-            'Cure Whip',
-            'Cure Custard',
-            'Cure Gelato',
-            'Cure Macaron',
-            'Cure Chocolat',
-            'Cure Parfait',
-            'Cure Pekorin'  
-        ]
+        self.cure_whip = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアホイップ', 'Cure Whip'])
+        self.cure_custard = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアカスタード', 'Cure Custard'])
+        self.cure_gelato = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアジェラート', 'Cure Gelato'])
+        self.cure_macalon = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアマカロン', 'Cure Macaron'])
+        self.cure_chocolat = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアショコラ', 'Cure Chocolat'])
+        self.cure_parfait = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアパルフェ', 'Cure Parfait'])
+        self.cure_pekorin = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアペコリン', 'Cure Pekorin'])
 
         ##### TODO：未作成
         # HUGっと！プリキュア
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        [
-            'Cure Yell',
-            'Cure Ange',
-            'Cure Etoile',
-            'Cure Macherie',
-            'Cure Amour',
-            'Cure Anfini',
-            'Cure Tomorrow'
-
-        ]
+        self.cure_yell = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアエール', 'Cure Yell'])
+        self.cure_ange = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアアンジュ', 'Cure Ange'])
+        self.cure_etoile = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアエトワール', 'Cure Etoile'])
+        self.cure_macherie = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアマシェリ', 'Cure Macherie'])
+        self.cure_amour = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアアムール', 'Cure Amour'])
+        self.cure_anfini = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアアンジュ', 'Cure Anfini'])
+        self.cure_tomorrow = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアトゥモロー', 'Cure Tomorrow'])
 
         ##### TODO：未作成
         # スター☆トゥインクルプリキュア
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        [
-            'Cure Star',
-            'Cure Milky',
-            'Cure Soleil',
-            'Cure Selene',
-            'Cure Cosmo',
-        ]
+        self.cure_star = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアスター', 'Cure Star'])
+        self.cure_milky = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアミルキー', 'Cure Milky'])
+        self.cure_soleil = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアソレイユ', 'Cure Soleil'])
+        self.cure_selene = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアセレーネ', 'Cure Selene'])
+        self.cure_cosmo = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアコスモ', 'Cure Cosmo'])
+
 
         # 作品タイトルと登場プリキュアのマップ
         self.title_to_characters = OrderedDict()
@@ -600,7 +576,7 @@ class test_cure_colormap(unittest.TestCase) :
 # VScode debug
 if __name__ != '__Main__':
     test = test_cure_colormap()
-    #test.test_sample_colormap_all()
+    test.test_sample_colormap_all()
     test.test_sample_colormap_by_title(['Witchy PreCure!'])
     #test.test_sample_iris()
 
