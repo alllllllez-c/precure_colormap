@@ -119,15 +119,16 @@ class cure_colormap :
         
         # スイートプリキュア♪
         self.cure_melody = self.generate_cure_cmap(['#DC3688', '#FF78C4', '#F9A5C9', '#FFFFFF'], ['キュアメロディ', 'Cure Melody'])
-        self.cure_rhythm = self.generate_cure_cmap(['#D0A947', '#FDF48B', '#FAB7E5', '#FFFFFF'], ['キュアリズム', 'Cure Rhythm']) # まだやりようがある ＃ 
+        self.cure_rhythm = self.generate_cure_cmap(['#D0A947', '#FDF48B', '#FAB7E5', '#FFFFFF'], ['キュアリズム', 'Cure Rhythm']) # まだやりようがある ＃ #FFFFFF が真ん中のほうがよくない？？？？
         self.cure_beat = self.generate_cure_cmap(['#303277', '#728CF1', '#C2EBFC', '#D393F8', '#FFFFFF'], ['キュアビート', 'Cure Beat'])
         self.cure_muse = self.generate_cure_cmap(['#C86424', '#FFAC4E', '#FACC2A', '#FFFB52', '#FFFFFF'], ['キュアミューズ', 'Cure Muse'])
 
-        # スマイルプリキュア!
-        self.cure_happy = self.generate_cure_cmap(['#A62169', '#EB4CB0', '#FFFFFF', '#FFFD9F', '#A68506'], ['キュアハッピー', 'Cure Happy'])
-        self.cure_sunny = self.generate_cure_cmap(['#A42C04', '#F95000', '#FEE285', '#FCDE06', '#A68506'], ['キュアサニー', 'Cure Sunny'])
-        self.cure_peace = self.generate_cure_cmap(['#F39900', '#FFFFEE', '#FDE552', '#D3A502', '#A68506'], ['キュアピース', 'Cure Peace'])
-        self.cure_march = self.generate_cure_cmap(['#208635', '#4DDC50', '#F3FED6', '#FAEA65', '#A68506'], ['キュアマーチ', 'Cure March'])
+        # スマイルプリキュア! 
+        # TODO ゴールドいる？
+        self.cure_happy = self.generate_cure_cmap(['#A62169', '#EB4CB0', '#FFFFFF', '#A68506'], ['キュアハッピー', 'Cure Happy'])
+        self.cure_sunny = self.generate_cure_cmap(['#A42C04', '#F95000', '#FEFFD5', '#A68506'], ['キュアサニー', 'Cure Sunny'])
+        self.cure_peace = self.generate_cure_cmap(['#D3A502', '#FDE552', '#FFFFEE', '#A68506'], ['キュアピース', 'Cure Peace'])
+        self.cure_march = self.generate_cure_cmap(['#208635', '#4DDC50', '#F3FED6', '#A68506'], ['キュアマーチ', 'Cure March'])
         self.cure_beauty = self.generate_cure_cmap(['#3135A5', '#86A6FF', '#DAE7FA', '#A68506'], ['キュアビューティ', 'Cure Beauty'])
 
         # ドキドキ!プリキュア
@@ -609,13 +610,11 @@ class test_cure_colormap(unittest.TestCase) :
         sns.heatmap(df[df.columns[df.columns != 'Species']].corr(),linewidths=0.1,vmax=1.0, square=True, linecolor='white', annot=True, cmap=cure_colors.cure_twinkle)
 
 
-unittest.main()
-
 
 # VScode debug
 if __name__ != '__Main__':
     test = test_cure_colormap()
-    test.test_sample_colormap_all()
+    #test.test_sample_colormap_all()
     test.test_sample_colormap_by_title(['Smile PreCure!'])
     #test.test_sample_iris()
 
