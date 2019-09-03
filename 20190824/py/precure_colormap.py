@@ -125,11 +125,11 @@ class cure_colormap :
 
         # スマイルプリキュア! 
         # TODO ゴールドいる？
-        self.cure_happy = self.generate_cure_cmap(['#A62169', '#EB4CB0', '#FFFFFF', '#A68506'], ['キュアハッピー', 'Cure Happy'])
-        self.cure_sunny = self.generate_cure_cmap(['#A42C04', '#F95000', '#FEFFD5', '#A68506'], ['キュアサニー', 'Cure Sunny'])
-        self.cure_peace = self.generate_cure_cmap(['#D3A502', '#FDE552', '#FFFFEE', '#A68506'], ['キュアピース', 'Cure Peace'])
-        self.cure_march = self.generate_cure_cmap(['#208635', '#4DDC50', '#F3FED6', '#A68506'], ['キュアマーチ', 'Cure March'])
-        self.cure_beauty = self.generate_cure_cmap(['#3135A5', '#86A6FF', '#DAE7FA', '#A68506'], ['キュアビューティ', 'Cure Beauty'])
+        self.cure_happy = self.generate_cure_cmap(['#A62169', '#EB4CB0', '#FFFFFF'], ['キュアハッピー', 'Cure Happy'])
+        self.cure_sunny = self.generate_cure_cmap(['#A42C04', '#F95000', '#FEFFD5'], ['キュアサニー', 'Cure Sunny'])
+        self.cure_peace = self.generate_cure_cmap(['#D3A502', '#FDE552', '#FFFFEE'], ['キュアピース', 'Cure Peace'])
+        self.cure_march = self.generate_cure_cmap(['#208635', '#4DDC50', '#F3FED6'], ['キュアマーチ', 'Cure March'])
+        self.cure_beauty = self.generate_cure_cmap(['#3135A5', '#86A6FF', '#DAE7FA'], ['キュアビューティ', 'Cure Beauty'])
 
         # ドキドキ!プリキュア
         self.cure_heart = self.generate_cure_cmap(['#D4A615', '#FFF99E', '#FAFAFA', '#FAB1E2', '#EC3C9C'], ['キュアハート', 'Cure Heart'])
@@ -144,7 +144,7 @@ class cure_colormap :
         self.cure_princess = self.generate_cure_cmap(['#3C558E', '#BEDBFF', '#FAEFAB', '#334463'], ['キュアプリンセス', 'Cure Princess'])
         self.cure_honey = self.generate_cure_cmap(['#F3A11E', '#FFD144', '#FFF0CC', '#334463'], ['キュアハニー', 'Cure Honey'])
         self.cure_fortune = self.generate_cure_cmap(['#756BD8', '#A79AF8', '#EAD3FF', '#334463'], ['キュアフォーチュン', 'Cure Fortune'])
-        self.cure_tender = self.generate_cure_cmap(['#4E567B', '#7A87B4', '#BFBDFE', '#354463'], ['キュアテンダー', 'Cure Tender']) # https://www.asahi.co.jp/precure/happiness/story/backnum_39.html
+        self.cure_tender = self.generate_cure_cmap(['#67729C', '#7A87B4', '#BFBDFE', '#354463'], ['キュアテンダー', 'Cure Tender']) # https://www.asahi.co.jp/precure/happiness/story/backnum_39.html
         self.cure_mirage = self.generate_cure_cmap(['#E34F4B', '#F06C7A', '#F1C3C6', '#354463'], ['キュアミラージュ', 'Cure Mirage']) # https://blogs.yahoo.co.jp/pkrgn012/folder/519751.html?m=lc&p=1
 
         # Go!プリンセスプリキュア
@@ -154,8 +154,8 @@ class cure_colormap :
         self.cure_scarlet = self.generate_cure_cmap(['#E73F94', '#FEC8FC', '#F6D437', '#E01646'], ['キュアスカーレット', 'Cure Scarlet'])        
 
         # 魔法つかいプリキュア!
-        self.cure_miracle = self.generate_cure_cmap(['#9479B9', '#E53972', '#F05EB1', '#FED6F5', '#FEF5FE', '#FFE36F'], ['キュアミラクル', 'Cure Miracle']) # ダイヤスタイルで統一
-        self.cure_magical = self.generate_cure_cmap(['#F270C6', '#A57AEB', '#C97BE2', '#DCBFEA', '#FBF2FE', '#D4DFB3'], ['キュアマジカル', 'Cure Magical']) # ダイヤスタイルで統一
+        self.cure_miracle = self.generate_cure_cmap(['#E53972', '#F05EB1', '#FED6F5', '#FFE36F', '#F08A6A'], ['キュアミラクル', 'Cure Miracle']) # ダイヤスタイルで統一
+        self.cure_magical = self.generate_cure_cmap(['#575E60', '#6A509D', '#8F79B5', '#AC7BB3', '#DE1A3F'], ['キュアマジカル', 'Cure Magical']) # ダイヤスタイルで統一
         self.cure_felice = self.generate_cure_cmap(['#FF649F', '#FFC8E7', '#FBFBF8', '#FFF75F', '#FBFBF8', '#D6FBEC', '#54E0A3'], ['キュアフェリーチェ', 'Cure Felice'])
         self.cure_mofurun = self.generate_cure_cmap(['#E37EAF', '#F8BA66', '#F29118', '#fff259', '#AD7BB3'], ['キュアモフルン', 'Cure Mofurun'])
 
@@ -601,7 +601,7 @@ class test_cure_colormap(unittest.TestCase) :
 if __name__ != '__Main__':
     test = test_cure_colormap()
     #test.test_sample_colormap_all()
-    test.test_sample_colormap_by_title(['Smile PreCure!', 'HappinessCharge PreCure!', 'Witchy PreCure!'])
+    test.test_sample_colormap_by_title(['Witchy PreCure!'])
     #test.test_sample_iris()
 
 
