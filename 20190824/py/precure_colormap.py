@@ -153,18 +153,11 @@ class cure_colormap :
         self.cure_twinkle = self.generate_cure_cmap(['#F15312', '#FF9A18', '#FDFF94', '#FCE92D', '#BA70F8'], ['キュアトゥインクル', 'Cure Twinkle'])
         self.cure_scarlet = self.generate_cure_cmap(['#E73F94', '#FEC8FC', '#F6D437', '#E01646'], ['キュアスカーレット', 'Cure Scarlet'])        
 
-        ##### TODO：未作成
         # 魔法つかいプリキュア!
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        self.cure_ = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュア＊＊', 'Cure **'])
-        [
-            'Cure Miracle',
-            'Cure Magical',
-            'Cure Felice',
-            'Cure Mofurun'
-        ]
+        self.cure_miracle = self.generate_cure_cmap(['#9479B9', '#E53972', '#F05EB1', '#FED6F5', '#FEF5FE', '#FFE36F'], ['キュアミラクル', 'Cure Miracle']) # ダイヤスタイルで統一
+        self.cure_magical = self.generate_cure_cmap(['#F270C6', '#A57AEB', '#C97BE2', '#DCBFEA', '#FBF2FE', '#D4DFB3'], ['キュアマジカル', 'Cure Magical']) # ダイヤスタイルで統一
+        self.cure_felice = self.generate_cure_cmap(['#FF649F', '#FFC8E7', '#FBFBF8', '#FFF75F', '#FBFBF8', '#D6FBEC', '#54E0A3'], ['キュアフェリーチェ', 'Cure Felice'])
+        self.cure_mofurun = self.generate_cure_cmap(['#E37EAF', '#F8BA66', '#F29118', '#fff259', '#AD7BB3'], ['キュアモフルン', 'Cure Mofurun'])
 
         ##### TODO：未作成
         # キラキラ☆プリキュアアラモード
@@ -608,7 +601,7 @@ class test_cure_colormap(unittest.TestCase) :
 if __name__ != '__Main__':
     test = test_cure_colormap()
     #test.test_sample_colormap_all()
-    test.test_sample_colormap_by_title(['Smile PreCure!', 'HappinessCharge PreCure!'])
+    test.test_sample_colormap_by_title(['Smile PreCure!', 'HappinessCharge PreCure!', 'Witchy PreCure!'])
     #test.test_sample_iris()
 
 
