@@ -1,4 +1,3 @@
-
 # coding: utf-8
 
 # Pythonで使えるプリキュアっぽいカラーマップを作ってみました。
@@ -13,13 +12,14 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+import seaborn as sns
 
 from collections import OrderedDict
 # colormapをカスタマイズする
 from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.colors import ListedColormap
 
-import seaborn as sns
+import unittest
 
 try:
     get_ipython().magic('matplotlib inline')
@@ -532,26 +532,37 @@ class cure_colormap :
 # In[ ]:
 
 ## テスト
-class test_cure_colormap() :
-    
+class test_cure_colormap(unittest.TestCase) :
+    # def __init__(self, *args, **argc):
+    #    super(test_cure_colormap, self).__init__()
+    #    self.cure_colors = cure_colormap()
     cure_colors = cure_colormap()
+
+    def setUp(self):
+        # 初期化処理
+        pass
     
-    def test_cure_colormap(self):
+    def tearDown(self):
+        # 終了処理
+        del self.cure_colors
+    
+    def test_generate_cure_cmap(self):
+        # TODO　：　テスト関数を分けよう
         # カラーマップ生成関数
         cmap = self.cure_colors.generate_cure_cmap([], [])
-        assert cmap is None, 'Failed to generate_cure_cmap([], [])'
-         # ちゃんと引数でテストして？
+        self.assertEqual(cmap, None, msg='Failed to generate_cure_cmap([], [])')
+         # TODO:ちゃんと引数でテストして？
         colors = ['black', 'white']
         cmap = self.cure_colors.generate_cure_cmap(colors, [], method=self.cure_colors.generate_cmap)
-        assert cmap is not None, 'Failed to generate_cure_cmap(method=generate_cmap)'
+        self.assertIsNotNone(cmap, msg='Failed to generate_cure_cmap(method=generate_cmap)')
         cmap_q = self.cure_colors.generate_cure_cmap(colors, [], method=self.cure_colors.generate_cmap_q)
-        assert cmap_q is not None, 'Failed to generate_cure_cmap(method=generate_cmap_q)'
+        self.assertIsNotNone(cmap_q, msg='Failed to generate_cure_cmap(method=generate_cmap_q)')
         # メンバ直打ち
-        assert self.cure_colors.cure_twinkle is not None, "ERROR: cure_colors.cure_twinkle is None" 
+        self.assertIsNotNone(self.cure_colors.cure_twinkle, msg="ERROR: cure_colors.cure_twinkle is None" )
         # 名前で呼ぶ
-        assert self.cure_colors.get_by_name('キュアトゥインクル') is not None, "ERROR: cure_colors.get_by_name('キュアトゥインクル') is None"
+        self.assertIsNotNone(self.cure_colors.get_by_name('キュアトゥインクル'), msg="ERROR: cure_colors.get_by_name('キュアトゥインクル') is None")
         # Noneに軟着陸する
-        assert self.cure_colors.get_by_name('キュアゴリラ') is None, "ERROR: cure_colors.get_by_name('キュアゴリラ') is None"
+        self.assertIsNone(self.cure_colors.get_by_name('キュアゴリラ'), msg="ERROR: cure_colors.get_by_name('キュアゴリラ') is None")
 
     def test_sample_colormap_all(self):
         self.cure_colors.sample_colormap_all()
@@ -598,12 +609,21 @@ class test_cure_colormap() :
         sns.heatmap(df[df.columns[df.columns != 'Species']].corr(),linewidths=0.1,vmax=1.0, square=True, linecolor='white', annot=True, cmap=cure_colors.cure_twinkle)
 
 
+unittest.main()
 
-test = test_cure_colormap()
-test.test_cure_colormap()
-test.test_sample_colormap_all()
-test.test_sample_colormap_by_title(['Smile PreCure!'])
-#test.test_sample_iris()
+
+# VScode debug
+if __name__ != '__Main__':
+    test = test_cure_colormap()
+    test.test_sample_colormap_all()
+    test.test_sample_colormap_by_title(['Smile PreCure!'])
+    #test.test_sample_iris()
+
+
+if __name__ == '__Main__':
+    unittest.main(verbosity=2)
+
+
 
 
 # # 参考資料
@@ -638,6 +658,9 @@ test.test_sample_colormap_by_title(['Smile PreCure!'])
 #    * 見落としていた先行研究。ありがたい！
 # 
 
+
+
+#%%
 
 
 #%%
