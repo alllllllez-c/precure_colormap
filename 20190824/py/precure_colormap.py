@@ -172,13 +172,12 @@ class cure_colormap :
         # HUGっと！プリキュア
         self.cure_yell = self.generate_cure_cmap(['#B30D39', '#F457A4', '#FEE0FE', '#A4EFCF', '#FEF395'], ['キュアエール', 'Cure Yell'])
         self.cure_ange = self.generate_cure_cmap(['#07A4FD', '#0EC9FE', '#A2EEFE', '#B9C9FB', '#FFF29C'], ['キュアアンジュ', 'Cure Ange'])
-        self.cure_etoile = self.generate_cure_cmap(['#EFAB17', '#F7D95D', '#FFFB86', '#6796EB', '#FFAD0C'], ['キュアエトワール', 'Cure Etoile'])
-        self.cure_macherie = self.generate_cure_cmap(['#FFFFE7', '#DA003B', '#FF4D6F', '#FF8AAE', '#FF6FBB', '#F56AD5'], ['キュアマシェリ', 'Cure Macherie'])
-        self.cure_amour = self.generate_cure_cmap(['#B9C0FF', '#9044B0', '#BC80E6', '#E35EEA', '#FF5DC0', '#FFA1C7'], ['キュアアムール', 'Cure Amour'])
-        self.cure_anfini = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアアンジュ', 'Cure Anfini'])
-        self.cure_tomorrow = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアトゥモロー', 'Cure Tomorrow'])
+        self.cure_etoile = self.generate_cure_cmap(['#EFAB17', '#F7D95D', '#FFFB86', '#FFAD0C', '#6796EB'], ['キュアエトワール', 'Cure Etoile'])
+        self.cure_macherie = self.generate_cure_cmap(['#DA003B', '#FF4D6F', '#FF8AAE', '#FF6FBB', '#F56AD5', '#FAFAA0'], ['キュアマシェリ', 'Cure Macherie'])
+        self.cure_amour = self.generate_cure_cmap(['#B9C0FF', '#BC80E6', '#E35EEA', '#FF5DC0', '#FFA1C7', '#9044B0'], ['キュアアムール', 'Cure Amour'])
+        self.cure_anfini = self.generate_cure_cmap(['#C5E8E1', '#F4F5F9', '#FCEDB3', '#CDD7FE', '#A3A8E7'], ['キュアアンフィニ', 'Cure Anfini'])
+        self.cure_tomorrow = self.generate_cure_cmap(['#FE1D79', '#FF98C2', '#FFD4ED', '#7CBFF3', '#FFF28F'], ['キュアトゥモロー', 'Cure Tomorrow']) # http://neoapo.com/characters/33689
 
-        ##### TODO：未作成
         # スター☆トゥインクルプリキュア
         self.cure_star = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアスター', 'Cure Star'])
         self.cure_milky = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアミルキー', 'Cure Milky'])
@@ -327,6 +326,7 @@ class cure_colormap :
             'Cure Etoile',
             'Cure Macherie',
             'Cure Amour',
+            'Cure Anfini',
             'Cure Tomorrow'
 
         ]
