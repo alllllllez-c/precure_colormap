@@ -174,20 +174,22 @@ class cure_colormap :
         self.cure_ange = self.generate_cure_cmap(['#07A4FD', '#0EC9FE', '#A2EEFE', '#B9C9FB', '#FFF29C'], ['キュアアンジュ', 'Cure Ange'])
         self.cure_etoile = self.generate_cure_cmap(['#EFAB17', '#F7D95D', '#FFFB86', '#FFAD0C', '#6796EB'], ['キュアエトワール', 'Cure Etoile'])
         self.cure_macherie = self.generate_cure_cmap(['#DA003B', '#FF4D6F', '#FF8AAE', '#FF6FBB', '#F56AD5', '#FAFAA0'], ['キュアマシェリ', 'Cure Macherie'])
-        self.cure_amour = self.generate_cure_cmap(['#B9C0FF', '#BC80E6', '#E35EEA', '#FF5DC0', '#FFA1C7', '#9044B0'], ['キュアアムール', 'Cure Amour'])
+        self.cure_amour = self.generate_cure_cmap(['#B9C0FF', '#BC80E6', '#E35EEA', '#9044B0', '#FF5DC0'], ['キュアアムール', 'Cure Amour'])
         self.cure_anfini = self.generate_cure_cmap(['#C5E8E1', '#F4F5F9', '#FCEDB3', '#CDD7FE', '#A3A8E7'], ['キュアアンフィニ', 'Cure Anfini'])
         self.cure_tomorrow = self.generate_cure_cmap(['#FE1D79', '#FF98C2', '#FFD4ED', '#7CBFF3', '#FFF28F'], ['キュアトゥモロー', 'Cure Tomorrow']) # http://neoapo.com/characters/33689
 
         # スター☆トゥインクルプリキュア
-        self.cure_star = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアスター', 'Cure Star'])
-        self.cure_milky = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアミルキー', 'Cure Milky'])
-        self.cure_soleil = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアソレイユ', 'Cure Soleil'])
-        self.cure_selene = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアセレーネ', 'Cure Selene'])
-        self.cure_cosmo = self.generate_cure_cmap(['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'], ['キュアコスモ', 'Cure Cosmo'])
+        self.cure_star = self.generate_cure_cmap(['#E94471', '#F04878', '#FEE0F1', '#FFF6C0', '#FFE354'], ['キュアスター', 'Cure Star'])
+        self.cure_milky = self.generate_cure_cmap(['#1E5DF6', '#16C1D0', '#BDF7FF', '#FEFFC0', '#FBE950'], ['キュアミルキー', 'Cure Milky'])
+        #self.cure_soleil = self.generate_cure_cmap(['#C659AC', '#FF8E20', '#FFBE2C', '#FFF599', '#FFDE3A'], ['キュアソレイユ', 'Cure Soleil'])
+        self.cure_soleil = self.generate_cure_cmap(['#C659AC', '#DB70A6', '#E26B14', '#FFBE2C', '#FFDE3A', '#FFF599'], ['キュアソレイユ', 'Cure Soleil'])
+        self.cure_selene = self.generate_cure_cmap(['#8969DA', '#AA96FF', '#CDA5FD', '#E8FDFF', '#FEFA70'], ['キュアセレーネ', 'Cure Selene'])
+        self.cure_cosmo = self.generate_cure_cmap(['#4F78FF', '#8AF0FC', '#B3FF7A', '#FFE63A', '#FF9D27', '#FF72D6', '#CD55ED', '#474969'], ['キュアコスモ', 'Cure Cosmo'], method=self.generate_cmap_q)
 
 
         # 作品タイトルと登場プリキュアのマップ
         self.title_to_characters = OrderedDict()
+
         # ふたりはプリキュア
         self.title_to_characters['Futari wa Pretty Cure'] = [
             'Cure Black',
@@ -268,7 +270,6 @@ class cure_colormap :
             'Cure Peace',
             'Cure March',
             'Cure Beauty',
-
         ]
 
         # ドキドキ!プリキュア
@@ -279,7 +280,6 @@ class cure_colormap :
             'Cure Sword',
             'Cure Ace',
             'Cure Sebastian',
-
         ]
 
         # ハピネスチャージプリキュア!
@@ -328,7 +328,6 @@ class cure_colormap :
             'Cure Amour',
             'Cure Anfini',
             'Cure Tomorrow'
-
         ]
 
         # スター☆トゥインクルプリキュア
@@ -573,7 +572,7 @@ class test_cure_colormap(unittest.TestCase) :
 if __name__ != '__Main__':
     test = test_cure_colormap()
     #test.test_sample_colormap_all()
-    test.test_sample_colormap_by_title(['Kirakira PreCure a la Mode', 'Hugtto! PreCure'])
+    test.test_sample_colormap_by_title(['Hugtto! PreCure', 'Star Twinkle PreCure'])
     #test.test_sample_iris()
 
 
