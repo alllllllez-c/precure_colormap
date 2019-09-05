@@ -507,14 +507,22 @@ class test_cure_colormap(unittest.TestCase) :
     def test_generate_cure_cmap(self):
         # TODO　：　テスト関数を分けよう
         # カラーマップ生成関数
+        # 色指定がないので生成しない
         cmap = self.cure_colors.generate_cure_cmap([], [])
-        self.assertEqual(cmap, None, msg='Failed to generate_cure_cmap([], [])')
-         # TODO:ちゃんと引数でテストして？
-        colors = ['black', 'white']
-        cmap = self.cure_colors.generate_cure_cmap(colors, [], method=self.cure_colors.generate_cmap)
-        self.assertIsNotNone(cmap, msg='Failed to generate_cure_cmap(method=generate_cmap)')
-        cmap_q = self.cure_colors.generate_cure_cmap(colors, [], method=self.cure_colors.generate_cmap_q)
-        self.assertIsNotNone(cmap_q, msg='Failed to generate_cure_cmap(method=generate_cmap_q)')
+        self.assertEqual(cmap, None, msg='Assert: generate_cure_cmap([], []) is NOT None')
+        
+        # 1色なので生成しない
+        cmap = self.cure_colors.generate_cure_cmap( ['black'], [])
+        self.assertEqual(cmap, None, msg="Assert: generate_cure_cmap(['black'], []) is NOT None")
+
+        # 生成する
+        cmap = self.cure_colors.generate_cure_cmap( ['black', 'white'], [], method=self.cure_colors.generate_cmap)
+        self.assertIsInstance(cmap, LinearSegmentedColormap, msg="Assert: generate_cure_cmap(['black', 'white'], []) type is NOT matplotlib.colors.LinearSegmentedColormap")
+
+        cmap = self.cure_colors.generate_cure_cmap( ['black', 'white'], [], method=self.cure_colors.generate_cmap_q)
+        self.assertIsInstance(cmap, ListedColormap, msg="Assert: generate_cure_cmap(['black', 'white'], []) type is NOT matplotlib.colors.ListedColormap")
+
+    def test_get_by_name(self):
         # メンバ直打ち
         self.assertIsNotNone(self.cure_colors.cure_twinkle, msg="ERROR: cure_colors.cure_twinkle is None" )
         # 名前で呼ぶ
@@ -532,13 +540,13 @@ class test_cure_colormap(unittest.TestCase) :
         from sklearn import datasets
         # おなじみのiris(アヤメ)データのロード
         iris = datasets.load_iris()
-
+        
         # DataFrameを構築 
         # n×4 行列 X として、アヤメのデータを格納した2次元配列(iris.data)を指定。カラム名もアヤメのデータから(iris.feature_name)
-        X = pd.DataFrame(iris.data, columns = iris.feature_names)
+        X = pd.DataFrame(data=iris.data, columns = iris.feature_names)
 
         # n次元ベクトル y として、アヤメの品種データを格納したベクトル(data.target)を指定。
-        y = pd.DataFrame(iris.target, columns = ['Species'])
+        y = pd.DataFrame(data=iris.target, columns = ['Species'])
 
         # X と y を結合して n×5 行列にする。axis=1 で列の方向に連結させる
         df = pd.concat([X, y], axis=1)
@@ -546,8 +554,8 @@ class test_cure_colormap(unittest.TestCase) :
         fig = plt.figure(figsize=(13,7))
         cure_colors = cure_colormap()
         sns.scatterplot(x='sepal length (cm)', y='sepal width (cm)', hue='Species', data=df, palette=cure_colors.cure_scarlet)
-
-        fig.colorbar(im)
+        
+        #fig.colorbar()
         plt.show()
 
         # (LT後追記)
@@ -571,9 +579,9 @@ class test_cure_colormap(unittest.TestCase) :
 # VScode debug
 if __name__ != '__Main__':
     test = test_cure_colormap()
-    #test.test_sample_colormap_all()
+    test.test_sample_colormap_all()
     test.test_sample_colormap_by_title(['Hugtto! PreCure', 'Star Twinkle PreCure'])
-    #test.test_sample_iris()
+    test.test_sample_iris()
 
 
 if __name__ == '__Main__':
