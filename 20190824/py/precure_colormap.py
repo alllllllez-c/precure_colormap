@@ -74,7 +74,7 @@ class cure_colormap :
 
         # ふたりはプリキュア
         # self.cure_black = self.generate_cure_cmap(['#00072A', '#00072A', '#842C72', '#FBFBFB', '#D49033', '#FF3398'], ['キュアブラック', 'Cure Black'], method=self.generate_cmap_q)
-        self.cure_black = self.generate_cure_cmap(['#00072A', '#00072A', '#FBFBFB', '#FF3398', '#6e4001'], ['キュアブラック', 'Cure Black']) # TODO まだ何か違う
+        self.cure_black = self.generate_cure_cmap(['#00072A', '#00072A', '#6e4001', '#FF3398', '#FBFBFB'], ['キュアブラック', 'Cure Black']) # TODO まだ何か違う
         # self.cure_white = self.generate_cure_cmap(['#F4F4F4', '#F4F4F4', '#78DDE4', '#0365B5', '#120c4f'], ['キュアホワイト', 'Cure White'], method=self.generate_cmap_q)
         self.cure_white = self.generate_cure_cmap(['#F4F4F4', '#F4F4F4', '#78DDE4', '#0365B5', '#120c4f'], ['キュアホワイト', 'Cure White']) # TODO 違う気がする
 
@@ -542,22 +542,18 @@ class test_cure_colormap(unittest.TestCase) :
         iris = datasets.load_iris()
         
         # DataFrameを構築 
-        # n×4 行列 X として、アヤメのデータを格納した2次元配列(iris.data)を指定。カラム名もアヤメのデータから(iris.feature_name)
-        X = pd.DataFrame(data=iris.data, columns = iris.feature_names)
+        # カラム名はデータに設定されてるのをそのまま使う(若干めんどい)
+        df = pd.DataFrame(data=iris.data, columns = iris.feature_names)
 
-        # n次元ベクトル y として、アヤメの品種データを格納したベクトル(data.target)を指定。
-        y = pd.DataFrame(data=iris.target, columns = ['Species'])
-
-        # X と y を結合して n×5 行列にする。axis=1 で列の方向に連結させる
-        df = pd.concat([X, y], axis=1)
+        # プリキュアを呼ぶ
+        cure_colors = cure_colormap()
 
         fig = plt.figure(figsize=(13,7))
-        cure_colors = cure_colormap()
-        sns.scatterplot(x='sepal length (cm)', y='sepal width (cm)', hue='Species', data=df, palette=cure_colors.cure_scarlet)
-        
-        #fig.colorbar()
+        df.plot.line(x='sepal length (cm)', style=['o', '*', 's'], colormap=cure_colors.cure_cosmo)
         plt.show()
 
+        plt.figure(figsize=(12,9)) # サイズ設定 
+        df.plot.hexbin(x='sepal length (cm)', y='petal length (cm)', gridsize=15, sharex=False, colormap=cure_colors.cure_twinkle)
         # (LT後追記)
         # 
         # 違うクラスタの色の差があまりない場合が多くて、
@@ -569,18 +565,14 @@ class test_cure_colormap(unittest.TestCase) :
         # 似た色で色分けしちちゃうことになる(結果見づらい)のは当たり前。
         # 
         # キュアコスモやキュアパルフェのように「七色」がキーカラーのプリキュアで色付するのがいいだろうと思いました。
-        # 相関係数行列
-
-        plt.figure(figsize=(12,9)) # サイズ設定 
-        sns.heatmap(df[df.columns[df.columns != 'Species']].corr(),linewidths=0.1,vmax=1.0, square=True, linecolor='white', annot=True, cmap=cure_colors.cure_twinkle)
 
 
 
 # VScode debug
 if __name__ != '__Main__':
     test = test_cure_colormap()
-    test.test_sample_colormap_all()
-    test.test_sample_colormap_by_title(['Hugtto! PreCure', 'Star Twinkle PreCure'])
+    #test.test_sample_colormap_all()
+    test.test_sample_colormap_by_title(['Futari wa Pretty Cure'])
     test.test_sample_iris()
 
 
