@@ -547,14 +547,30 @@ class test_cure_colormap(unittest.TestCase) :
 
         # プリキュアを呼ぶ
         cure_colors = cure_colormap()
-
-        fig = plt.figure(figsize=(13,7))
-        df.plot.line(x='sepal length (cm)', style=['o', '*', 's'], colormap=cure_colors.cure_cosmo)
+        cc = cure_colors.get_by_name('キュアコスモ')
+        
+        # 六角形ビニング図（hexbin plot）
+        # 散布図での六角形のエリアに入る点の数を色の濃さで表したグラフ 
+        # 背景まで塗っちゃうから、トーンが揃ってるか、先頭の色が薄いプリキュアじゃないと違和感
+        plt.figure(figsize=(12,9)) # サイズ設定 
+        df.plot.hexbin(x='sepal length (cm)', y='petal length (cm)', gridsize=8, sharex=False, colormap=cure_colors.get_by_name('キュアトゥインクル'))
+        plt.show()
+        df.plot.hexbin(x='sepal length (cm)', y='petal length (cm)', gridsize=8, sharex=False, colormap=cure_colors.get_by_name('キュアアンフィニ')) # この配色が一番よい
         plt.show()
 
-        plt.figure(figsize=(12,9)) # サイズ設定 
-        df.plot.hexbin(x='sepal length (cm)', y='petal length (cm)', gridsize=15, sharex=False, colormap=cure_colors.cure_twinkle)
-        # (LT後追記)
+        # 相関係数でヒートマップ
+        sns.heatmap(df.corr(),linewidths=0.1,vmax=1.0, square=True, linecolor='white', annot=True, cmap=cure_colors.get_by_name('キュアフローラ'))
+        plt.show()
+
+        # 複数データ散布図
+        fig = plt.figure(figsize=(13,7))
+        ax = df.plot.scatter(x='sepal length (cm)', y='sepal width (cm)', label='petal width (cm)', c=cc.colors[0], marker='s') # Listedなカラーマップはこれでとれる
+        ax = df.plot.scatter(x='sepal length (cm)', y='petal length (cm)', label='petal length (cm)', c=cc.colors[5], marker='o', ax=ax) 
+        ax = df.plot.scatter(x='sepal length (cm)', y='petal width (cm)', label='petal width (cm)', c=cc.colors[1], marker='*', ax=ax)
+        plt.legend()
+        plt.show()
+
+        # (プリキュアハッカソン LT後追記)
         # 
         # 違うクラスタの色の差があまりない場合が多くて、
         # LTしながら「あまりいい使用例じゃないな。。。」と思った。というか言ってた。
@@ -572,7 +588,7 @@ class test_cure_colormap(unittest.TestCase) :
 if __name__ != '__Main__':
     test = test_cure_colormap()
     #test.test_sample_colormap_all()
-    test.test_sample_colormap_by_title(['Futari wa Pretty Cure'])
+    #test.test_sample_colormap_by_title(['Futari wa Pretty Cure', 'Futari wa Pretty Cure Max Heart'])
     test.test_sample_iris()
 
 
