@@ -364,7 +364,6 @@ class cure_colormap :
         ---------
         colors : array of color hexcode
             色の配列。色は16進数数か色名で指定。
-            2色以上指定すること。
 
         Returns
         ------
@@ -373,6 +372,8 @@ class cure_colormap :
         '''
 
         values = range(len(colors))
+        if len(values) == 0:
+            return None
 
         vmax = np.ceil(np.max(values))
         if vmax == 0.0:
@@ -408,6 +409,8 @@ class cure_colormap :
         ---------
         colors : array of color (hexcode or color name)
             色の配列。色は16進数数か色名で指定。
+            1色以上指定すること。
+            配列が空だった場合は、色を生成しない。またプリキュア名との対応付けもしない。
         
         names : array of str
             カラーマップと対応させるプリキュアの名前。
@@ -417,7 +420,7 @@ class cure_colormap :
             generate_cmap か generate_cmap_q を指定すること。
 
         Returns
-        ------
+        -------
         cmap : matplotlib.colors.Colormap 
             カラーマップのインスタンス。
             作成できなかった場合はNone
@@ -426,7 +429,13 @@ class cure_colormap :
         if method is None:
             method = self.generate_cmap
         
+        if len(colors) < 1:
+            return None
+        
         cmap = method(colors)
+        if cmap is None:
+            return None
+
         for name in names:
             self.name_to_cmap[name] = cmap
         
@@ -522,35 +531,36 @@ class test_cure_colormap(unittest.TestCase) :
     def test_generate_cure_cmap_no_color(self):
         # 色指定がないので生成しない
         cmap = self.cure_colors.generate_cure_cmap([], [], method=self.cure_colors.generate_cmap)
-        self.assertIsNone(cmap, msg='Assert: generate_cure_cmap([], [], method=self.cure_colors.generate_cmap) is NOT None')
+        self.assertIsNone(cmap, msg='generate_cure_cmap([], [], method=self.cure_colors.generate_cmap)')
 
     def test_generate_cure_cmap_no_color_q(self):
         cmap = self.cure_colors.generate_cure_cmap([], [], method=self.cure_colors.generate_cmap_q)
-        self.assertIsNone(cmap, msg='Assert: generate_cure_cmap([], [], method=self.cure_colors.generate_cmap_q) is NOT None')
+        self.assertIsNone(cmap, msg='generate_cure_cmap([], [], method=self.cure_colors.generate_cmap_q)')
 
     def test_generate_cure_cmap_single_color(self):
         # 1色で生成しない
         cmap = self.cure_colors.generate_cure_cmap( ['black'], [], method=self.cure_colors.generate_cmap)
-        self.assertIsNone(cmap, msg="Assert: generate_cure_cmap(['black'], []) is NOT None")
+        self.assertIsNone(cmap, msg="generate_cure_cmap(['black'], [], method=self.cure_colors.generate_cmap)")
 
     def test_generate_cure_cmap_single_color_q(self):
         # 質的なものは1色で生成できる
         cmap = self.cure_colors.generate_cure_cmap( ['black'], [], method=self.cure_colors.generate_cmap_q)
-        self.assertIsInstance(cmap, LinearSegmentedColormap, msg="Assert: generate_cure_cmap(['black'], []) is NOT None")
+        self.assertIsNotNone(cmap, msg="generate_cure_cmap(['black'], [], method=self.cure_colors.generate_cmap_q)")
 
     def test_generate_cure_cmap(self):
         # 生成する
-        cmap = self.cure_colors.generate_cure_cmap( ['black', 'white'], [], method=self.cure_colors.generate_cmap)
-        self.assertIsInstance(cmap, LinearSegmentedColormap, msg="Assert: generate_cure_cmap(['black', 'white'], []) is NOT matplotlib.colors.LinearSegmentedColormap")
+        cmap = self.cure_colors.generate_cure_cmap( ['black', 'white'], ['cure_tmp'], method=self.cure_colors.generate_cmap)
+        self.assertIsInstance(cmap, LinearSegmentedColormap, msg="generate_cure_cmap(['black', 'white'], [])")
 
-        cmap = self.cure_colors.generate_cure_cmap( ['black', 'white'], [], method=self.cure_colors.generate_cmap_q)
-        self.assertIsInstance(cmap, ListedColormap, msg="Assert: generate_cure_cmap(['black', 'white'], []) is NOT matplotlib.colors.ListedColormap")
+    def test_generate_cure_cmap_q(self):
+        cmap = self.cure_colors.generate_cure_cmap( ['black', 'white'], ['cure_tmp'], method=self.cure_colors.generate_cmap_q)
+        self.assertIsInstance(cmap, ListedColormap, msg="generate_cure_cmap(['black', 'white'], [])")
 
     def test_get_by_name(self):
         # 名前で呼ぶ
-        self.assertIsNotNone(self.cure_colors.get_by_name('キュアトゥインクル'), msg="Assert: cure_colors.get_by_name('キュアトゥインクル') is None")
+        self.assertIsNotNone(self.cure_colors.get_by_name('キュアトゥインクル'), msg="cure_colors.get_by_name('キュアトゥインクル')")
         # 存在しない場合はNone
-        self.assertIsNone(self.cure_colors.get_by_name('キュアゴリラ'), msg="Assert: cure_colors.get_by_name('キュアゴリラ') is None")
+        self.assertIsNone(self.cure_colors.get_by_name('キュアゴリラ'), msg="cure_colors.get_by_name('キュアゴリラ')")
 
     def test_sample_colormap_all(self):
         self.cure_colors.sample_colormap_all()
