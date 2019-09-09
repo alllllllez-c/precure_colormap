@@ -364,19 +364,23 @@ class cure_colormap :
         ---------
         colors : array of color hexcode
             色の配列。色は16進数数か色名で指定。
+            2色以上指定すること。
 
         Returns
         ------
         matplotlib.colors.Colormap instance
-
+            作れなかった場合はNone
         '''
 
         values = range(len(colors))
 
         vmax = np.ceil(np.max(values))
+        if vmax == 0.0:
+            return None
+        
         color_list = []
         for v, c in zip(values, colors):
-            color_list.append( ( v / vmax, c) )
+            color_list.append((v/vmax, c))
         return LinearSegmentedColormap.from_list('custom_cmap', color_list)
     
     def generate_cmap_q(self, colors) :
@@ -422,9 +426,6 @@ class cure_colormap :
         if method is None:
             method = self.generate_cmap
         
-        if len(colors) < 1:
-            return None
-        
         cmap = method(colors)
         for name in names:
             self.name_to_cmap[name] = cmap
@@ -465,7 +466,6 @@ class cure_colormap :
         
         for ax, name in zip(axes, cmap_list):
             plot_color_map(ax, gradient, name)
-            # plot_color_map(axR, gradient, name + '_r') # 逆向きは作っていないので、上の表示も順方向だけのものに変更
 
     def sample_colormap_by_title(self, titles):
         '''
@@ -521,16 +521,22 @@ class test_cure_colormap(unittest.TestCase) :
     
     def test_generate_cure_cmap_no_color(self):
         # 色指定がないので生成しない
-        cmap = self.cure_colors.generate_cure_cmap([], [])
-        self.assertEqual(cmap, None, msg='Assert: generate_cure_cmap([], []) is NOT None')
+        cmap = self.cure_colors.generate_cure_cmap([], [], method=self.cure_colors.generate_cmap)
+        self.assertIsNone(cmap, msg='Assert: generate_cure_cmap([], [], method=self.cure_colors.generate_cmap) is NOT None')
+
+    def test_generate_cure_cmap_no_color_q(self):
+        cmap = self.cure_colors.generate_cure_cmap([], [], method=self.cure_colors.generate_cmap_q)
+        self.assertIsNone(cmap, msg='Assert: generate_cure_cmap([], [], method=self.cure_colors.generate_cmap_q) is NOT None')
 
     def test_generate_cure_cmap_single_color(self):
-        # 1色で生成する
-        cmap = self.cure_colors.generate_cure_cmap( ['black'], [], method=self.cure_colors.generate_cmap_q)
-        self.assertIsInstance(cmap, LinearSegmentedColormap, msg="Assert: generate_cure_cmap(['black'], []) is NOT matplotlib.colors.LinearSegmentedColormap")
+        # 1色で生成しない
+        cmap = self.cure_colors.generate_cure_cmap( ['black'], [], method=self.cure_colors.generate_cmap)
+        self.assertIsNone(cmap, msg="Assert: generate_cure_cmap(['black'], []) is NOT None")
 
-        cmap = self.cure_colors.generate_cure_cmap( ['black'], [], self.cure_colors.generate_cmap)
-        self.assertIsInstance(cmap, ListedColormap, msg="Assert: generate_cure_cmap(['black'], []) is NOT matplotlib.colors.ListedColormap")
+    def test_generate_cure_cmap_single_color_q(self):
+        # 質的なものは1色で生成できる
+        cmap = self.cure_colors.generate_cure_cmap( ['black'], [], method=self.cure_colors.generate_cmap_q)
+        self.assertIsInstance(cmap, LinearSegmentedColormap, msg="Assert: generate_cure_cmap(['black'], []) is NOT None")
 
     def test_generate_cure_cmap(self):
         # 生成する
@@ -552,59 +558,6 @@ class test_cure_colormap(unittest.TestCase) :
     def test_sample_colormap_by_title(self):
         self.cure_colors.sample_colormap_by_title(['Futari wa Pretty Cure', 'Futari wa Pretty Cure Max Heart'])
 
-    def test_sample_iris(self):
-        # TODO：ここじゃないよね
-        from sklearn import datasets
-        # スタイル設定
-        # style="whitegrid"：白背景＋グリッド
-        sns.set(style="whitegrid") 
-
-        # おなじみのiris(アヤメ)データのロード
-        iris = datasets.load_iris()
-        
-        # DataFrameを構築 
-        # カラム名はデータに設定されてるのをそのまま使う(若干めんどいけど)
-        df = pd.DataFrame(data=iris.data, columns = iris.feature_names)
-
-        # プリキュアを呼ぶ
-        cure_colors = cure_colormap()
-        
-        # サイズ設定
-        plt.figure(figsize=(12,9))
-
-        # 複数データ散布図
-        cc = cure_colors.get_by_name('キュアコスモ')
-        ax = df.plot.scatter(x='sepal length (cm)', y='sepal width (cm)', label='petal width (cm)', c=cc.colors[0], marker='s') # Listedなカラーマップはこれでとれる
-        ax = df.plot.scatter(x='sepal length (cm)', y='petal length (cm)', label='petal length (cm)', c=cc.colors[5], marker='o', ax=ax) 
-        ax = df.plot.scatter(x='sepal length (cm)', y='petal width (cm)', label='petal width (cm)', c=cc.colors[1], marker='*', ax=ax)
-        plt.legend()
-        plt.show()
-
-        # 相関係数でヒートマップ
-        sns.heatmap(df.corr(),linewidths=0.1,vmax=1.0, square=True, linecolor='white', annot=True, cmap=cure_colors.get_by_name('キュアフローラ'))
-        plt.show()
-
-        # 六角形ビニング図（hexbin plot）
-        # 散布図での六角形のエリアに入る点の数を色の濃さで表したグラフ 
-        # 背景まで塗っちゃうから、トーンが揃ってるか、先頭の色が薄いプリキュアじゃないと違和感
-        df.plot.hexbin(x='sepal length (cm)', y='petal length (cm)', gridsize=8, sharex=False, colormap=cure_colors.get_by_name('キュアトゥインクル'))
-        plt.show()
-        df.plot.hexbin(x='sepal length (cm)', y='petal length (cm)', gridsize=8, sharex=False, colormap=cure_colors.get_by_name('キュアアンフィニ')) # この配色が一番よい
-        plt.show()
-
-        # (プリキュアハッカソン LT後追記)
-        # 
-        # 違うクラスタの色の差があまりない場合が多くて、
-        # LTしながら「あまりいい使用例じゃないな。。。」と思った。というか言ってた。
-        # ごめんなさい、トワ様。
-        # 
-        # よくよく考えたら、キャラクターに使用する色合いってのは
-        # 調和が取れる色になっているわけで、
-        # 似た色で色分けしちちゃうことになる(結果見づらい)のは当たり前。
-        # 
-        # キュアコスモやキュアパルフェのように「七色」がキーカラーのプリキュアで色付するのがいいだろうと思いました。
-
-
 
 
 #########################################################
@@ -615,8 +568,6 @@ class test_cure_colormap(unittest.TestCase) :
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
-
-
 
 
 # # 参考資料
