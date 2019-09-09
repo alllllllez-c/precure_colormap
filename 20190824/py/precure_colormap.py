@@ -413,7 +413,8 @@ class cure_colormap :
             配列が空だった場合は、色を生成しない。またプリキュア名との対応付けもしない。
         
         names : array of str
-            カラーマップと対応させるプリキュアの名前。
+            カラーマップと対応させるプリキュアの名前を
+            格納した配列
 
         method : function 
             カラーマップを生成する関数。
@@ -443,9 +444,8 @@ class cure_colormap :
 
     def plot_color_maps(self, cmap_category, cmap_list):
         '''
-        指定したカラーマップを一覧表示する。
-        表示の際「カテゴリ名」を掲出
-
+        指定したカテゴリ名でカラーマップを一覧表示する
+        
         Parameters
         ----------
         cmap_category : str
@@ -492,6 +492,7 @@ class cure_colormap :
                 continue
             
             self.plot_color_maps(title, cmap_list)
+        plt.show()
 
     def sample_colormap_all(self):
         '''
@@ -509,7 +510,6 @@ class cure_colormap :
         
         for cmap_category, cmap_list in self.title_to_characters.items():
             self.plot_color_maps(cmap_category, cmap_list)
-
         plt.show()
 
 
@@ -538,7 +538,7 @@ class test_cure_colormap(unittest.TestCase) :
         self.assertIsNone(cmap, msg='generate_cure_cmap([], [], method=self.cure_colors.generate_cmap_q)')
 
     def test_generate_cure_cmap_single_color(self):
-        # 1色で生成しない
+        # 1色で生成しない。グラデーションだからできない
         cmap = self.cure_colors.generate_cure_cmap( ['black'], [], method=self.cure_colors.generate_cmap)
         self.assertIsNone(cmap, msg="generate_cure_cmap(['black'], [], method=self.cure_colors.generate_cmap)")
 
@@ -565,8 +565,18 @@ class test_cure_colormap(unittest.TestCase) :
     def test_sample_colormap_all(self):
         self.cure_colors.sample_colormap_all()
 
+    def test_sample_colormap_by_title_empty(self):
+        # 表示なし
+        self.cure_colors.sample_colormap_by_title([])
+
+    def test_sample_colormap_by_title_invalid(self):
+        # 知らない作品はスルー
+        self.cure_colors.sample_colormap_by_title(['*** PreCure'])
+
     def test_sample_colormap_by_title(self):
+        # 指定した作品のカラーマップを表示
         self.cure_colors.sample_colormap_by_title(['Futari wa Pretty Cure', 'Futari wa Pretty Cure Max Heart'])
+
 
 
 
