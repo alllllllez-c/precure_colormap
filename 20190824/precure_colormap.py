@@ -2,8 +2,8 @@
 #                                                       #
 # cure_colormap.py                                      #
 #                                                       #
-# プリキュアっぽい配色で                                #
-# グラフを描くためのカラーマップ                        #
+# プリキュアっぽい配色で                                  #
+# グラフを描くためのカラーマップ                           #
 #                                                       #
 #########################################################
 
@@ -588,37 +588,4 @@ class test_cure_colormap(unittest.TestCase) :
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
-
-
-# # 参考資料
-# 
-# 
-#  * __＜【Python】matplotlibによるグラフ描画時のColormapのカスタマイズ＞__  
-#     [https://qiita.com/kenmatsu4/items/fe8a2f1c34c8d5676df8](https://qiita.com/kenmatsu4/items/fe8a2f1c34c8d5676df8)
-#  * __＜matplotlib - カラーマップについて＞__  
-#     [http://pynote.hatenablog.com/entry/matplotlib-color](http://pynote.hatenablog.com/entry/matplotlib-color)
-#     
-
-# # その他
-# 
-# 
-# ## プリキュアの名称について
-# 
-#  * 英語名とメンバ変数名は[英語版Wikipedia](https://en.wikipedia.org/wiki/Pretty_Cure)準拠
-# 
-# ### 色の採り方について
-# 
-#  * 「[プリキュアガーデン](http://www.toei-anim.co.jp/ptr/precure/)」以下の各作品ページにある
-#    キャラクター紹介ページの画像から抽出
-#    * 「髪の毛の色」、「衣装の色」で構成してます
-#    * ただしSSは絵が足りなかったので[朝日放送のページ](https://www.asahi.co.jp/precure_ss/)から
-#      ・・・と思ったけどキュアブライトとキュアウインディが載ってなかった。えぇ・・・
-#  * Chrome拡張「ColorPick Eyedropper」を使用して取得
-#    * 配布は[こちら](https://chrome.google.com/webstore/detail/colorpick-eyedropper/ohcpnigalekghcmgcdcenkpelffpdolg)
-# 
-# ### 追加の資料情報
-# 
-#  * [＜キュアっぽさは色味から。カラースキームを抽出してプリキュアっぽいカラーパレットを作ってみよう＞ ](https://www.gizmodo.jp/2017/05/precure-color-palette.html)
-#    * 見落としていた先行研究。ありがたい！
-# 
 
