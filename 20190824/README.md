@@ -35,7 +35,7 @@
 
 [キュアトゥインクル](https://dic.pixiv.net/a/%E3%82%AD%E3%83%A5%E3%82%A2%E3%83%88%E3%82%A5%E3%82%A4%E3%83%B3%E3%82%AF%E3%83%AB)っぽい配色で描画します。[^1] 
 
-![cure_twinkle](/uploads/e17a8c05f3925fbc472cfee4e4018d3f/cure_twinkle.jpg)
+![cure_twinkle](https://user-images.githubusercontent.com/13117729/65551912-ef39b580-df5d-11e9-96fc-1fea6c75a725.png)
 
 ```
 import seaborn as sns
@@ -58,7 +58,7 @@ df.plot.hexbin(x='sepal length (cm)', y='petal length (cm)',
 plt.show()
 ```
 
-![cure_twinkle_hexbin](/uploads/d817f7bf1ba8591c53dcd8991715f6fc/cure_twinkle_hexbin.png)
+![cure_twinkle_hexbin](https://user-images.githubusercontent.com/13117729/65551928-fa8ce100-df5d-11e9-94c8-93fa6c893a29.png)
 
 
 ## 参考資料
